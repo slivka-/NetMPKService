@@ -68,7 +68,7 @@ namespace NetMPK.Service
 
         #endregion
 
-        #region Registration
+        #region AccountFunctions
 
         [OperationContract]
         bool LoginFree(string login);
@@ -80,7 +80,7 @@ namespace NetMPK.Service
         bool RegisterUser(string login, string password, string email);
 
         [OperationContract]
-        bool LoginUser(string login, string password, out string userID);
+        Tuple<bool,string> LoginUser(string login, string password);
         #endregion
 
     }

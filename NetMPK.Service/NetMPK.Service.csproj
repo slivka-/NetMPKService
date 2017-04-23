@@ -26,7 +26,7 @@
     <XsdCodeGenImportXmlTypes>True</XsdCodeGenImportXmlTypes>
     <XsdCodeGenGenerateSerializableTypes>True</XsdCodeGenGenerateSerializableTypes>
     <XsdCodeGenGenerateInternalTypes>False</XsdCodeGenGenerateInternalTypes>
-    <XsdCodeGenEnableDataBinding>False</XsdCodeGenEnableDataBinding>
+    <XsdCodeGenEnableDataBinding>True</XsdCodeGenEnableDataBinding>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -85,9 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="credentials.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="MPKDB.xsc">

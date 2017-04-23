@@ -985,7 +985,7 @@ namespace NetMPK.Service
 
         #endregion
 
-        #region Registration
+        #region AccountFunctions
         public bool LoginFree(string login)
         {
             using (var adapter = new MPK_UserTableAdapter())
@@ -1025,7 +1025,7 @@ namespace NetMPK.Service
             }
         }
 
-        public bool LoginUser(string login, string password, out string userID)
+        public Tuple<bool, string> LoginUser(string login, string password)
         {
             using (var adapter = new MPK_UserTableAdapter())
             {
@@ -1033,13 +1033,11 @@ namespace NetMPK.Service
                 var userPass = adapter.GetUserPassword(login);
                 if (userPass == null || !userPass.Equals(encryptedPassword))
                 {
-                    userID = null;
-                    return false;
+                    return Tuple.Create<bool,string>(false, null);
                 }
                 else
                 {
-                    userID = adapter.GetUserId(login, encryptedPassword).ToString();
-                    return true;
+                    return Tuple.Create(true, adapter.GetUserId(login, encryptedPassword).ToString());
                 }
             }
         }
