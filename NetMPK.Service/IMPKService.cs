@@ -81,6 +81,12 @@ namespace NetMPK.Service
 
         [OperationContract]
         Tuple<bool,string> LoginUser(string login, string password);
+
+        [OperationContract]
+        Tuple<bool, string> LoginEncryptedUser(string login, string encryptedPassword);
+
+        [OperationContract]
+        string GetEncryptedPassword(string login, string password);
         #endregion
 
     }

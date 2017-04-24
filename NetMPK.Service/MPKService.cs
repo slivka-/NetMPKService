@@ -1041,6 +1041,39 @@ namespace NetMPK.Service
                 }
             }
         }
+
+        public Tuple<bool, string> LoginEncryptedUser(string login, string encryptedPassword)
+        {
+            using (var adapter = new MPK_UserTableAdapter())
+            {
+                var userPass = adapter.GetUserPassword(login);
+                if (userPass == null || !userPass.Equals(encryptedPassword))
+                {
+                    return Tuple.Create<bool, string>(false, null);
+                }
+                else
+                {
+                    return Tuple.Create(true, adapter.GetUserId(login, encryptedPassword).ToString());
+                }
+            }
+        }
+
+        public string GetEncryptedPassword(string login, string password)
+        {
+            using (var adapter = new MPK_UserTableAdapter())
+            {
+                var encryptedPassword = Encryptor.Encrypt(password);
+                var userPass = adapter.GetUserPassword(login);
+                if (userPass == null || !userPass.Equals(encryptedPassword))
+                {
+                    return null;
+                }
+                else
+                {
+                    return encryptedPassword;
+                }
+            }
+        }
         #endregion
 
     }
