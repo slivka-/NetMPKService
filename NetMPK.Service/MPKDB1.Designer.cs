@@ -16670,7 +16670,7 @@ SELECT ID, Stop_Name, X_Coord, Y_Coord, Street_ID FROM Stops WHERE (ID = @ID)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[10];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[11];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, Stop_Name, X_Coord, Y_Coord, Street_ID FROM dbo.Stops";
@@ -16704,22 +16704,18 @@ SELECT ID, Stop_Name, X_Coord, Y_Coord, Street_ID FROM Stops WHERE (ID = @ID)";
             this._commandCollection[6].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[7] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[7].Connection = this.Connection;
-            this._commandCollection[7].CommandText = "SELECT        ID\r\nFROM            Stops\r\nWHERE        (Stop_Name = @StopName)";
+            this._commandCollection[7].CommandText = @"SELECT        ID, Stop_Name, X_Coord, Y_Coord, Street_ID
+FROM            Stops AS s
+WHERE        (X_Coord <> - 1) AND (Y_Coord <> - 1) AND (X_Coord > @Longitude - @Radius) AND (X_Coord < @Longitude + @Radius) AND (Y_Coord > @Latitude - @Radius) AND (Y_Coord < @Latitude + @Radius)";
             this._commandCollection[7].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StopName", global::System.Data.SqlDbType.VarChar, 250, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Longitude", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Radius", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Latitude", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[8] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[8].Connection = this.Connection;
-            this._commandCollection[8].CommandText = @"SELECT        ID, Stop_Name, X_Coord, Y_Coord, Street_ID
-FROM            Stops
-WHERE        (Stop_Name IN
-                             (SELECT DISTINCT Stop_Name
-                               FROM            Desc_Route_Points
-                               WHERE        (Line_No IN
-                                                             (SELECT        Line_No
-                                                               FROM            Viable_Lines
-                                                               WHERE        (Area = @Area))))) AND (X_Coord <> - 1)";
+            this._commandCollection[8].CommandText = "SELECT        ID\r\nFROM            Stops\r\nWHERE        (Stop_Name = @StopName)";
             this._commandCollection[8].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Area", global::System.Data.SqlDbType.VarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StopName", global::System.Data.SqlDbType.VarChar, 250, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[9] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[9].Connection = this.Connection;
             this._commandCollection[9].CommandText = @"SELECT        ID, Stop_Name, X_Coord, Y_Coord, Street_ID
@@ -16730,9 +16726,22 @@ WHERE        (Stop_Name IN
                                WHERE        (Line_No IN
                                                              (SELECT        Line_No
                                                                FROM            Viable_Lines
-                                                               WHERE        (Vehicle = @Vehicle))))) AND (X_Coord <> - 1)";
+                                                               WHERE        (Area = @Area))))) AND (X_Coord <> - 1)";
             this._commandCollection[9].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[9].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Vehicle", global::System.Data.SqlDbType.VarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[9].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Area", global::System.Data.SqlDbType.VarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[10] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[10].Connection = this.Connection;
+            this._commandCollection[10].CommandText = @"SELECT        ID, Stop_Name, X_Coord, Y_Coord, Street_ID
+FROM            Stops
+WHERE        (Stop_Name IN
+                             (SELECT DISTINCT Stop_Name
+                               FROM            Desc_Route_Points
+                               WHERE        (Line_No IN
+                                                             (SELECT        Line_No
+                                                               FROM            Viable_Lines
+                                                               WHERE        (Vehicle = @Vehicle))))) AND (X_Coord <> - 1)";
+            this._commandCollection[10].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[10].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Vehicle", global::System.Data.SqlDbType.VarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16791,8 +16800,37 @@ WHERE        (Stop_Name IN
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual MPKDB.StopsDataTable GetNearestStop(global::System.Nullable<double> Longitude, global::System.Nullable<double> Radius, global::System.Nullable<double> Latitude) {
+            this.Adapter.SelectCommand = this.CommandCollection[7];
+            if ((Longitude.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((double)(Longitude.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((Radius.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((double)(Radius.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((Latitude.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((double)(Latitude.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            MPKDB.StopsDataTable dataTable = new MPKDB.StopsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual MPKDB.StopsDataTable GetViableStopsByArea(string Area) {
-            this.Adapter.SelectCommand = this.CommandCollection[8];
+            this.Adapter.SelectCommand = this.CommandCollection[9];
             if ((Area == null)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -16809,7 +16847,7 @@ WHERE        (Stop_Name IN
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual MPKDB.StopsDataTable GetViableStopsByType(string Vehicle) {
-            this.Adapter.SelectCommand = this.CommandCollection[9];
+            this.Adapter.SelectCommand = this.CommandCollection[10];
             if ((Vehicle == null)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -17148,7 +17186,7 @@ WHERE        (Stop_Name IN
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual global::System.Nullable<int> GetStopIdByName(string StopName) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[7];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[8];
             if ((StopName == null)) {
                 throw new global::System.ArgumentNullException("StopName");
             }

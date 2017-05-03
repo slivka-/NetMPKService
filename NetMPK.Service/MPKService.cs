@@ -53,6 +53,59 @@ namespace NetMPK.Service
                 return adapter.GetData().Select(s => Tuple.Create(s.Stop_Name, s.X_Coord, s.Y_Coord)).ToList();
             }
         }
+
+        public Tuple<string, double, double> GetNearestStop(double latitude, double longitude)
+        {
+            using (var adapter = new StopsTableAdapter())
+            {
+                MPKDB.StopsRow resultRow = null;
+                double currentRadius = 0.0050;
+                bool decreased = false;
+                bool calculateCurrent = false;
+                while (resultRow == null)
+                {
+                    var resultData = adapter.GetNearestStop(longitude, currentRadius, latitude);
+                    if (resultData.Count == 0)
+                    {
+                        currentRadius += 0.0010;
+                        if (decreased)
+                        {
+                            calculateCurrent = true;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (resultData.Count == 1)
+                        {
+                            resultRow = resultData.First();
+                        }
+                        else
+                        {
+                            currentRadius -= 0.0010;
+                            decreased = true;
+                        }
+                    }
+                }
+                if (calculateCurrent)
+                {
+                    var tempResult = adapter.GetNearestStop(longitude, currentRadius, latitude).ToList();
+                    List<Tuple<string,double>> distList = new List<Tuple<string, double>>();
+                    foreach (var row in tempResult)
+                    {
+                        double distance = Math.Sqrt(Math.Pow(Math.Abs(longitude-row.X_Coord),2) + Math.Pow(Math.Abs(latitude - row.Y_Coord), 2));
+                        distList.Add(Tuple.Create(row.Stop_Name, distance));
+                    }
+                    distList.OrderBy(o => o.Item2);
+                    return tempResult.Where(w => w.Stop_Name == distList.First().Item1).Select(s => Tuple.Create(s.Stop_Name, s.Y_Coord, s.X_Coord)).First();
+                }
+                else
+                {
+                    return Tuple.Create(resultRow.Stop_Name, resultRow.Y_Coord, resultRow.X_Coord);
+                }
+            }
+            return null;
+        }
         #endregion
 
         #region Lines
@@ -86,7 +139,7 @@ namespace NetMPK.Service
         {
             using (var adapter = new Desc_Route_PointsTableAdapter())
             {
-                return adapter.GetDataByLine(lineNo).Where(w => w.Stop_Name.Equals(stopName)).Select(s => s.Direction).Distinct().ToList();
+                return adapter.GetDataByLine(lineNo).Select(s => s.Direction).Distinct().ToList();
             }
         }
 

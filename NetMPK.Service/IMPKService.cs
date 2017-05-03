@@ -33,6 +33,9 @@ namespace NetMPK.Service
 
         [OperationContract]
         List<string> GetDirectionsForLine(int lineNo, string stopName);
+
+        [OperationContract]
+        Tuple<string, double, double> GetNearestStop(double latitude, double longitude);
         #endregion
 
         #region Streets
