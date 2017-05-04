@@ -58,53 +58,23 @@ namespace NetMPK.Service
         {
             using (var adapter = new StopsTableAdapter())
             {
-                MPKDB.StopsRow resultRow = null;
+                MPKDB.StopsDataTable resultTable = null;
                 double currentRadius = 0.0050;
-                bool decreased = false;
-                bool calculateCurrent = false;
-                while (resultRow == null)
+                resultTable = adapter.GetNearestStop(latitude, currentRadius, longitude);
+                while (resultTable.Count == 0)
                 {
-                    var resultData = adapter.GetNearestStop(longitude, currentRadius, latitude);
-                    if (resultData.Count == 0)
-                    {
-                        currentRadius += 0.0010;
-                        if (decreased)
-                        {
-                            calculateCurrent = true;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (resultData.Count == 1)
-                        {
-                            resultRow = resultData.First();
-                        }
-                        else
-                        {
-                            currentRadius -= 0.0010;
-                            decreased = true;
-                        }
-                    }
+                    currentRadius += 0.0010;
+                    resultTable = adapter.GetNearestStop(latitude, currentRadius, longitude);
                 }
-                if (calculateCurrent)
+                List<Tuple<string,double>> distList = new List<Tuple<string, double>>();
+                foreach (var row in resultTable)
                 {
-                    var tempResult = adapter.GetNearestStop(longitude, currentRadius, latitude).ToList();
-                    List<Tuple<string,double>> distList = new List<Tuple<string, double>>();
-                    foreach (var row in tempResult)
-                    {
-                        double distance = Math.Sqrt(Math.Pow(Math.Abs(longitude-row.X_Coord),2) + Math.Pow(Math.Abs(latitude - row.Y_Coord), 2));
-                        distList.Add(Tuple.Create(row.Stop_Name, distance));
-                    }
-                    distList.OrderBy(o => o.Item2);
-                    return tempResult.Where(w => w.Stop_Name == distList.First().Item1).Select(s => Tuple.Create(s.Stop_Name, s.Y_Coord, s.X_Coord)).First();
+                    double distance = Math.Sqrt(Math.Pow(Math.Abs(longitude-row.X_Coord),2) + Math.Pow(Math.Abs(latitude - row.Y_Coord), 2));
+                    distList.Add(Tuple.Create(row.Stop_Name, distance));
                 }
-                else
-                {
-                    return Tuple.Create(resultRow.Stop_Name, resultRow.Y_Coord, resultRow.X_Coord);
-                }
+                distList.OrderBy(o => o.Item2);
+                return resultTable.Where(w => w.Stop_Name == distList.First().Item1).Select(s => Tuple.Create(s.Stop_Name, s.X_Coord, s.Y_Coord)).First();
             }
-            return null;
         }
         #endregion
 
