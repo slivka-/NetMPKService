@@ -60,7 +60,8 @@ namespace NetMPK.Service
             {
                 MPKDB.StopsDataTable resultTable = null;
                 double currentRadius = 0.0050;
-                resultTable = adapter.GetNearestStop(latitude, currentRadius, longitude);
+                //resultTable = adapter.GetNearestStop(latitude, currentRadius, longitude);
+                resultTable = adapter.GetNearestStop(longitude, currentRadius, latitude);
                 while (resultTable.Count == 0)
                 {
                     currentRadius += 0.0010;
