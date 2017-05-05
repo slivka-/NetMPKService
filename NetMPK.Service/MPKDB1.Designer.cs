@@ -19037,7 +19037,7 @@ SELECT ID, Type, Date_Added, Confirmations, User_ID, X_Coord, Y_Coord, Stop_ID, 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Point_From, Point_To, Distance FROM dbo.Desc_Points_Distance";
@@ -19049,6 +19049,12 @@ SELECT ID, Type, Date_Added, Confirmations, User_ID, X_Coord, Y_Coord, Stop_ID, 
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StopFrom", global::System.Data.SqlDbType.VarChar, 250, global::System.Data.ParameterDirection.Input, 0, 0, "Point_From", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StopTo", global::System.Data.SqlDbType.VarChar, 250, global::System.Data.ParameterDirection.Input, 0, 0, "Point_To", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT Point_From, Point_To, Distance FROM dbo.Desc_Points_Distance WHERE Point_F" +
+                "rom = @StopName";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StopName", global::System.Data.SqlDbType.VarChar, 250, global::System.Data.ParameterDirection.Input, 0, 0, "Point_From", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -19070,6 +19076,23 @@ SELECT ID, Type, Date_Added, Confirmations, User_ID, X_Coord, Y_Coord, Stop_ID, 
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual MPKDB.Desc_Points_DistanceDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            MPKDB.Desc_Points_DistanceDataTable dataTable = new MPKDB.Desc_Points_DistanceDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual MPKDB.Desc_Points_DistanceDataTable GetNeighbourStops(string StopName) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((StopName == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(StopName));
+            }
             MPKDB.Desc_Points_DistanceDataTable dataTable = new MPKDB.Desc_Points_DistanceDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;

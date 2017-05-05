@@ -116,6 +116,41 @@ namespace NetMPK.Service
 
         #endregion
 
+        #region Connections
+        public Tuple<string, string> GetProbableConnections(double longitude, double latitude)
+        {
+            Desc_Points_DistanceTableAdapter dpdadapter = new Desc_Points_DistanceTableAdapter();
+            StopsTableAdapter sadapter = new StopsTableAdapter();
+            try
+            {
+                Dictionary<string, double> distFromPath = new Dictionary<string, double>();
+                var nearestStop = GetNearestStop(latitude, longitude);
+                var neighbourStopsNames = dpdadapter.GetNeighbourStops(nearestStop.Item1).Select(s => s.Point_To).ToList();
+
+                foreach (string name in neighbourStopsNames)
+                {
+                    var stopInfo = sadapter.GetDataByStopName(name).Single();
+
+                    double a = (nearestStop.Item2 - stopInfo.X_Coord);
+                    double b = (nearestStop.Item3 - stopInfo.Y_Coord);
+                    double c = ((-1 * nearestStop.Item3) * a) + ((-1 * nearestStop.Item2) * b);
+
+                    double dist = Math.Abs((longitude * a) + (latitude * b) + c) / Math.Sqrt((a * a) + (b * b));
+                    distFromPath.Add(name, dist);
+                }
+                
+                return distFromPath.OrderBy(o => o.Value).Select(s => Tuple.Create(nearestStop.Item1, s.Key)).First();
+            }
+            finally
+            {
+                if (dpdadapter != null)
+                    dpdadapter.Dispose();
+                if (sadapter != null)
+                    sadapter.Dispose();
+            }
+        }
+        #endregion
+
         #region Streets
         public string GetStreetNameByStop(string stopName)
         {

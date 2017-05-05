@@ -22,8 +22,11 @@ namespace NetMPK.Service
 
         [OperationContract]
         List<Tuple<string, double, double>> GetStopWithCords();
+
+        [OperationContract]
+        Tuple<string, double, double> GetNearestStop(double latitude, double longitude);
         #endregion
-   
+
         #region Lines
         [OperationContract]
         List<Tuple<int, string, string, string, string>> GetAllLines();
@@ -33,9 +36,11 @@ namespace NetMPK.Service
 
         [OperationContract]
         List<string> GetDirectionsForLine(int lineNo, string stopName);
+        #endregion
 
+        #region Connections
         [OperationContract]
-        Tuple<string, double, double> GetNearestStop(double latitude, double longitude);
+        Tuple<string, string> GetProbableConnections(double longitude, double latitude);
         #endregion
 
         #region Streets
