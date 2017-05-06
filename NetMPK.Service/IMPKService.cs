@@ -25,6 +25,10 @@ namespace NetMPK.Service
 
         [OperationContract]
         Tuple<string, double, double> GetNearestStop(double latitude, double longitude);
+
+        [OperationContract]
+        List<Tuple<string, string>> GetStopsWithNeighbours();
+
         #endregion
 
         #region Lines
@@ -95,6 +99,11 @@ namespace NetMPK.Service
 
         [OperationContract]
         string GetEncryptedPassword(string login, string password);
+        #endregion
+
+        #region TrafficIncidents
+        [OperationContract]
+        bool RegisterTrafficIncident(string incidentType, string stopFrom, string stopTo, string userID);
         #endregion
 
     }

@@ -5,11 +5,25 @@ using NetMPK.Service.MPKDBTableAdapters;
 using System.Windows;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.ServiceModel;
+using System.ServiceModel.Description;
+using System.Configuration;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace NetMPK.Service
 {
     public class MPKService : IMPKService
     {
+        private static readonly int minimalShowPower = 1;
+
+        public static void Configure(ServiceConfiguration config)
+        {
+            config.LoadFromConfiguration(ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap {ExeConfigFilename = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory)+@"\Debug\App.config" },ConfigurationUserLevel.None));
+
+            Task t = Task.Run((Action)RefreshTrafficIncidentData);
+        }
+
         #region Stops
         public List<string> GetStopsNames()
         { 
@@ -75,6 +89,14 @@ namespace NetMPK.Service
                 }
                 distList.OrderBy(o => o.Item2);
                 return resultTable.Where(w => w.Stop_Name == distList.First().Item1).Select(s => Tuple.Create(s.Stop_Name, s.X_Coord, s.Y_Coord)).First();
+            }
+        }
+
+        public List<Tuple<string, string>> GetStopsWithNeighbours()
+        {
+            using (var adapter = new Desc_Points_DistanceTableAdapter())
+            {
+                return adapter.GetData().Select(s => Tuple.Create(s.Point_From, s.Point_To)).ToList();
             }
         }
         #endregion
@@ -1074,7 +1096,7 @@ namespace NetMPK.Service
                 try
                 {
                     var encryptedPassword = Encryptor.Encrypt(password);
-                    adapter.Insert(login, login, encryptedPassword, email, null, 0,0);
+                    adapter.Insert(login, login, encryptedPassword, email, null, 0,1);
                     return true;
                 }
                 catch (Exception)
@@ -1135,5 +1157,137 @@ namespace NetMPK.Service
         }
         #endregion
 
+        #region TrafficIncidents
+        public bool RegisterTrafficIncident(string incidentType, string stopFrom, string stopTo, string userID)
+        {
+            MPK_UserTableAdapter muadapter = new MPK_UserTableAdapter();
+            Traffic_IncidentTableAdapter tiadapter = new Traffic_IncidentTableAdapter();
+            StopsTableAdapter sadapter = new StopsTableAdapter();
+            try
+            {
+                int numUserId = 0;
+                if (int.TryParse(userID, out numUserId))
+                {
+                    int fromId = (int)sadapter.GetStopIdByName(stopFrom);
+                    int toId = (int)sadapter.GetStopIdByName(stopTo);
+                    int trustLvl = (int)muadapter.GetTrustLvl(numUserId);
+                    var data = tiadapter.GetDataByIncident(incidentType, fromId, toId);
+                    if (data.Count == 0)
+                    {
+                        tiadapter.Insert(incidentType, DateTime.UtcNow, fromId, toId, trustLvl,false);
+                        return true;
+                    }
+                    else
+                    {
+                        var rowToUpdate = data.Single();
+                        rowToUpdate.Date_Added = DateTime.Now;
+                        rowToUpdate.Show_Power += trustLvl;
+                        tiadapter.Update(rowToUpdate);
+                        return true;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                if (muadapter != null)
+                    muadapter.Dispose();
+                if (tiadapter != null)
+                    tiadapter.Dispose();
+                if (sadapter != null)
+                    sadapter.Dispose();
+            }
+        }
+        #endregion
+
+
+        #region BackgroundTasks
+        private static void RefreshTrafficIncidentData()
+        {
+            while (true)
+            {
+                Traffic_IncidentTableAdapter tiadapter = new Traffic_IncidentTableAdapter();
+                Points_DistanceTableAdapter pdadapter = new Points_DistanceTableAdapter();
+                Reference_Points_DistanceTableAdapter rpdadapter = new Reference_Points_DistanceTableAdapter();
+                try
+                {
+                    var trafficEvents = tiadapter.GetData();
+                    var notActiveEvents = trafficEvents.Where(w => w.In_Use == false).ToList();
+                    var activeEvents = trafficEvents.Where(w => w.In_Use == true).ToList();
+
+                    foreach (var ev in activeEvents)
+                    {
+                        if ((ev.Date_Added - DateTime.UtcNow).TotalMinutes > 60)
+                        {
+                            int baseDistance = (int)rpdadapter.GetDistanceFromPoints(ev.Stop_From, ev.Stop_To);
+                            var pointsToReset = pdadapter.GetDataByPoints(ev.Stop_From, ev.Stop_To);
+                            for (int i = 0; i < 2; i++)
+                            {
+                                pointsToReset[i].Distance = baseDistance;
+                            }
+                            pdadapter.Update(pointsToReset);
+                            tiadapter.Delete(ev.ID, ev.Incident_Type, ev.Date_Added, ev.Stop_From, ev.Stop_To, ev.Show_Power, ev.In_Use);
+                        }
+                    }
+                    foreach (var ev in notActiveEvents)
+                    {
+                        if (ev.Show_Power >= minimalShowPower)
+                        {
+                            ev.In_Use = true;
+                            int delay = ev.Incident_Type.IncidentToDelay();
+                            var data = pdadapter.GetDataByPoints(ev.Stop_From, ev.Stop_To);
+                            for (int i = 0; i < 2; i++)
+                            {
+                                data[i].Distance += delay;
+                            }
+                            pdadapter.Update(data);
+                            tiadapter.Update(ev);
+                        }
+                    }
+                }
+                finally
+                {
+                    if (tiadapter != null)
+                        tiadapter.Dispose();
+                    if (pdadapter != null)
+                        pdadapter.Dispose();
+                    if (rpdadapter != null)
+                        rpdadapter.Dispose();
+                }
+                Thread.Sleep(1000*60*5); //5 min
+            }
+        }
+        #endregion
+    }
+
+    public static class IncidentEnxtender
+    {
+        public static int IncidentToDelay(this string s)
+        {
+            int output = 0;
+            switch (s)
+            {
+                case "ACC":
+                    output = 10;
+                    break;
+                case "REP":
+                    output = 5;
+                    break;
+                case "JAM":
+                    output = 7;
+                    break;
+                case "OTH":
+                    output = 3;
+                    break;
+            }
+            return output;
+        }
     }
 }

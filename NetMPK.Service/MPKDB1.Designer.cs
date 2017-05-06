@@ -30,8 +30,6 @@ namespace NetMPK.Service {
         
         private MPK_UserDataTable tableMPK_User;
         
-        private MPK_User_Tracking_InfoDataTable tableMPK_User_Tracking_Info;
-        
         private Points_DistanceDataTable tablePoints_Distance;
         
         private Route_PointsDataTable tableRoute_Points;
@@ -39,8 +37,6 @@ namespace NetMPK.Service {
         private StopsDataTable tableStops;
         
         private StreetsDataTable tableStreets;
-        
-        private Traffic_EventDataTable tableTraffic_Event;
         
         private Desc_Route_PointsDataTable tableDesc_Route_Points;
         
@@ -68,11 +64,13 @@ namespace NetMPK.Service {
         
         private Desc_MPK_User_RoutesDataTable tableDesc_MPK_User_Routes;
         
+        private Traffic_IncidentDataTable tableTraffic_Incident;
+        
+        private Reference_Points_DistanceDataTable tableReference_Points_Distance;
+        
         private global::System.Data.DataRelation relationLine_DeparturesFK_Direction;
         
         private global::System.Data.DataRelation relationLine_DeparturesFK_LineID;
-        
-        private global::System.Data.DataRelation relationMPK_User_Tracking_InfoFK_User;
         
         private global::System.Data.DataRelation relationPoints_DistanceFK_Point_From;
         
@@ -86,19 +84,15 @@ namespace NetMPK.Service {
         
         private global::System.Data.DataRelation relationStopFK_StreetID;
         
-        private global::System.Data.DataRelation relationTraffic_EventFK_Direction;
-        
-        private global::System.Data.DataRelation relationTraffic_EventFK_LineID;
-        
-        private global::System.Data.DataRelation relationTraffic_EventFK_StopID;
-        
-        private global::System.Data.DataRelation relationTraffic_EventFK_User;
-        
         private global::System.Data.DataRelation relationMPK_User_RoutesKF_FS_Id;
         
         private global::System.Data.DataRelation relationMPK_User_RoutesKF_LS_Id;
         
         private global::System.Data.DataRelation relationMPK_User_RoutesKF_User_Id;
+        
+        private global::System.Data.DataRelation relationTraffic_IncidentFK_StopFrom;
+        
+        private global::System.Data.DataRelation relationTraffic_IncidentFK_StopTo;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -137,9 +131,6 @@ namespace NetMPK.Service {
                 if ((ds.Tables["MPK_User"] != null)) {
                     base.Tables.Add(new MPK_UserDataTable(ds.Tables["MPK_User"]));
                 }
-                if ((ds.Tables["MPK_User_Tracking_Info"] != null)) {
-                    base.Tables.Add(new MPK_User_Tracking_InfoDataTable(ds.Tables["MPK_User_Tracking_Info"]));
-                }
                 if ((ds.Tables["Points_Distance"] != null)) {
                     base.Tables.Add(new Points_DistanceDataTable(ds.Tables["Points_Distance"]));
                 }
@@ -151,9 +142,6 @@ namespace NetMPK.Service {
                 }
                 if ((ds.Tables["Streets"] != null)) {
                     base.Tables.Add(new StreetsDataTable(ds.Tables["Streets"]));
-                }
-                if ((ds.Tables["Traffic_Event"] != null)) {
-                    base.Tables.Add(new Traffic_EventDataTable(ds.Tables["Traffic_Event"]));
                 }
                 if ((ds.Tables["Desc_Route_Points"] != null)) {
                     base.Tables.Add(new Desc_Route_PointsDataTable(ds.Tables["Desc_Route_Points"]));
@@ -193,6 +181,12 @@ namespace NetMPK.Service {
                 }
                 if ((ds.Tables["Desc_MPK_User_Routes"] != null)) {
                     base.Tables.Add(new Desc_MPK_User_RoutesDataTable(ds.Tables["Desc_MPK_User_Routes"]));
+                }
+                if ((ds.Tables["Traffic_Incident"] != null)) {
+                    base.Tables.Add(new Traffic_IncidentDataTable(ds.Tables["Traffic_Incident"]));
+                }
+                if ((ds.Tables["Reference_Points_Distance"] != null)) {
+                    base.Tables.Add(new Reference_Points_DistanceDataTable(ds.Tables["Reference_Points_Distance"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -246,16 +240,6 @@ namespace NetMPK.Service {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public MPK_User_Tracking_InfoDataTable MPK_User_Tracking_Info {
-            get {
-                return this.tableMPK_User_Tracking_Info;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public Points_DistanceDataTable Points_Distance {
             get {
                 return this.tablePoints_Distance;
@@ -289,16 +273,6 @@ namespace NetMPK.Service {
         public StreetsDataTable Streets {
             get {
                 return this.tableStreets;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public Traffic_EventDataTable Traffic_Event {
-            get {
-                return this.tableTraffic_Event;
             }
         }
         
@@ -434,6 +408,26 @@ namespace NetMPK.Service {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public Traffic_IncidentDataTable Traffic_Incident {
+            get {
+                return this.tableTraffic_Incident;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public Reference_Points_DistanceDataTable Reference_Points_Distance {
+            get {
+                return this.tableReference_Points_Distance;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -508,9 +502,6 @@ namespace NetMPK.Service {
                 if ((ds.Tables["MPK_User"] != null)) {
                     base.Tables.Add(new MPK_UserDataTable(ds.Tables["MPK_User"]));
                 }
-                if ((ds.Tables["MPK_User_Tracking_Info"] != null)) {
-                    base.Tables.Add(new MPK_User_Tracking_InfoDataTable(ds.Tables["MPK_User_Tracking_Info"]));
-                }
                 if ((ds.Tables["Points_Distance"] != null)) {
                     base.Tables.Add(new Points_DistanceDataTable(ds.Tables["Points_Distance"]));
                 }
@@ -522,9 +513,6 @@ namespace NetMPK.Service {
                 }
                 if ((ds.Tables["Streets"] != null)) {
                     base.Tables.Add(new StreetsDataTable(ds.Tables["Streets"]));
-                }
-                if ((ds.Tables["Traffic_Event"] != null)) {
-                    base.Tables.Add(new Traffic_EventDataTable(ds.Tables["Traffic_Event"]));
                 }
                 if ((ds.Tables["Desc_Route_Points"] != null)) {
                     base.Tables.Add(new Desc_Route_PointsDataTable(ds.Tables["Desc_Route_Points"]));
@@ -564,6 +552,12 @@ namespace NetMPK.Service {
                 }
                 if ((ds.Tables["Desc_MPK_User_Routes"] != null)) {
                     base.Tables.Add(new Desc_MPK_User_RoutesDataTable(ds.Tables["Desc_MPK_User_Routes"]));
+                }
+                if ((ds.Tables["Traffic_Incident"] != null)) {
+                    base.Tables.Add(new Traffic_IncidentDataTable(ds.Tables["Traffic_Incident"]));
+                }
+                if ((ds.Tables["Reference_Points_Distance"] != null)) {
+                    base.Tables.Add(new Reference_Points_DistanceDataTable(ds.Tables["Reference_Points_Distance"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -616,12 +610,6 @@ namespace NetMPK.Service {
                     this.tableMPK_User.InitVars();
                 }
             }
-            this.tableMPK_User_Tracking_Info = ((MPK_User_Tracking_InfoDataTable)(base.Tables["MPK_User_Tracking_Info"]));
-            if ((initTable == true)) {
-                if ((this.tableMPK_User_Tracking_Info != null)) {
-                    this.tableMPK_User_Tracking_Info.InitVars();
-                }
-            }
             this.tablePoints_Distance = ((Points_DistanceDataTable)(base.Tables["Points_Distance"]));
             if ((initTable == true)) {
                 if ((this.tablePoints_Distance != null)) {
@@ -644,12 +632,6 @@ namespace NetMPK.Service {
             if ((initTable == true)) {
                 if ((this.tableStreets != null)) {
                     this.tableStreets.InitVars();
-                }
-            }
-            this.tableTraffic_Event = ((Traffic_EventDataTable)(base.Tables["Traffic_Event"]));
-            if ((initTable == true)) {
-                if ((this.tableTraffic_Event != null)) {
-                    this.tableTraffic_Event.InitVars();
                 }
             }
             this.tableDesc_Route_Points = ((Desc_Route_PointsDataTable)(base.Tables["Desc_Route_Points"]));
@@ -730,22 +712,31 @@ namespace NetMPK.Service {
                     this.tableDesc_MPK_User_Routes.InitVars();
                 }
             }
+            this.tableTraffic_Incident = ((Traffic_IncidentDataTable)(base.Tables["Traffic_Incident"]));
+            if ((initTable == true)) {
+                if ((this.tableTraffic_Incident != null)) {
+                    this.tableTraffic_Incident.InitVars();
+                }
+            }
+            this.tableReference_Points_Distance = ((Reference_Points_DistanceDataTable)(base.Tables["Reference_Points_Distance"]));
+            if ((initTable == true)) {
+                if ((this.tableReference_Points_Distance != null)) {
+                    this.tableReference_Points_Distance.InitVars();
+                }
+            }
             this.relationLine_DeparturesFK_Direction = this.Relations["Line_DeparturesFK_Direction"];
             this.relationLine_DeparturesFK_LineID = this.Relations["Line_DeparturesFK_LineID"];
-            this.relationMPK_User_Tracking_InfoFK_User = this.Relations["MPK_User_Tracking_InfoFK_User"];
             this.relationPoints_DistanceFK_Point_From = this.Relations["Points_DistanceFK_Point_From"];
             this.relationPoints_DistanceFK_Point_To = this.Relations["Points_DistanceFK_Point_To"];
             this.relationRoute_PointFK_Direction = this.Relations["Route_PointFK_Direction"];
             this.relationRoute_PointFK_LineID = this.Relations["Route_PointFK_LineID"];
             this.relationRoute_PointFK_StopID = this.Relations["Route_PointFK_StopID"];
             this.relationStopFK_StreetID = this.Relations["StopFK_StreetID"];
-            this.relationTraffic_EventFK_Direction = this.Relations["Traffic_EventFK_Direction"];
-            this.relationTraffic_EventFK_LineID = this.Relations["Traffic_EventFK_LineID"];
-            this.relationTraffic_EventFK_StopID = this.Relations["Traffic_EventFK_StopID"];
-            this.relationTraffic_EventFK_User = this.Relations["Traffic_EventFK_User"];
             this.relationMPK_User_RoutesKF_FS_Id = this.Relations["MPK_User_RoutesKF_FS_Id"];
             this.relationMPK_User_RoutesKF_LS_Id = this.Relations["MPK_User_RoutesKF_LS_Id"];
             this.relationMPK_User_RoutesKF_User_Id = this.Relations["MPK_User_RoutesKF_User_Id"];
+            this.relationTraffic_IncidentFK_StopFrom = this.Relations["Traffic_IncidentFK_StopFrom"];
+            this.relationTraffic_IncidentFK_StopTo = this.Relations["Traffic_IncidentFK_StopTo"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -762,8 +753,6 @@ namespace NetMPK.Service {
             base.Tables.Add(this.tableLines);
             this.tableMPK_User = new MPK_UserDataTable();
             base.Tables.Add(this.tableMPK_User);
-            this.tableMPK_User_Tracking_Info = new MPK_User_Tracking_InfoDataTable();
-            base.Tables.Add(this.tableMPK_User_Tracking_Info);
             this.tablePoints_Distance = new Points_DistanceDataTable();
             base.Tables.Add(this.tablePoints_Distance);
             this.tableRoute_Points = new Route_PointsDataTable();
@@ -772,8 +761,6 @@ namespace NetMPK.Service {
             base.Tables.Add(this.tableStops);
             this.tableStreets = new StreetsDataTable();
             base.Tables.Add(this.tableStreets);
-            this.tableTraffic_Event = new Traffic_EventDataTable();
-            base.Tables.Add(this.tableTraffic_Event);
             this.tableDesc_Route_Points = new Desc_Route_PointsDataTable();
             base.Tables.Add(this.tableDesc_Route_Points);
             this.tableNextStops = new NextStopsDataTable();
@@ -800,6 +787,10 @@ namespace NetMPK.Service {
             base.Tables.Add(this.tableMPK_User_Routes);
             this.tableDesc_MPK_User_Routes = new Desc_MPK_User_RoutesDataTable();
             base.Tables.Add(this.tableDesc_MPK_User_Routes);
+            this.tableTraffic_Incident = new Traffic_IncidentDataTable();
+            base.Tables.Add(this.tableTraffic_Incident);
+            this.tableReference_Points_Distance = new Reference_Points_DistanceDataTable();
+            base.Tables.Add(this.tableReference_Points_Distance);
             this.relationLine_DeparturesFK_Direction = new global::System.Data.DataRelation("Line_DeparturesFK_Direction", new global::System.Data.DataColumn[] {
                         this.tableStops.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableLine_Departures.DirectionColumn}, false);
@@ -808,10 +799,6 @@ namespace NetMPK.Service {
                         this.tableLines.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableLine_Departures.LineIDColumn}, false);
             this.Relations.Add(this.relationLine_DeparturesFK_LineID);
-            this.relationMPK_User_Tracking_InfoFK_User = new global::System.Data.DataRelation("MPK_User_Tracking_InfoFK_User", new global::System.Data.DataColumn[] {
-                        this.tableMPK_User.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMPK_User_Tracking_Info.UserIDColumn}, false);
-            this.Relations.Add(this.relationMPK_User_Tracking_InfoFK_User);
             this.relationPoints_DistanceFK_Point_From = new global::System.Data.DataRelation("Points_DistanceFK_Point_From", new global::System.Data.DataColumn[] {
                         this.tableRoute_Points.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tablePoints_Distance.Point_FromColumn}, false);
@@ -836,22 +823,6 @@ namespace NetMPK.Service {
                         this.tableStreets.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableStops.Street_IDColumn}, false);
             this.Relations.Add(this.relationStopFK_StreetID);
-            this.relationTraffic_EventFK_Direction = new global::System.Data.DataRelation("Traffic_EventFK_Direction", new global::System.Data.DataColumn[] {
-                        this.tableStops.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableTraffic_Event.DirectionColumn}, false);
-            this.Relations.Add(this.relationTraffic_EventFK_Direction);
-            this.relationTraffic_EventFK_LineID = new global::System.Data.DataRelation("Traffic_EventFK_LineID", new global::System.Data.DataColumn[] {
-                        this.tableLines.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableTraffic_Event.Line_IDColumn}, false);
-            this.Relations.Add(this.relationTraffic_EventFK_LineID);
-            this.relationTraffic_EventFK_StopID = new global::System.Data.DataRelation("Traffic_EventFK_StopID", new global::System.Data.DataColumn[] {
-                        this.tableStops.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableTraffic_Event.Stop_IDColumn}, false);
-            this.Relations.Add(this.relationTraffic_EventFK_StopID);
-            this.relationTraffic_EventFK_User = new global::System.Data.DataRelation("Traffic_EventFK_User", new global::System.Data.DataColumn[] {
-                        this.tableMPK_User.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableTraffic_Event.User_IDColumn}, false);
-            this.Relations.Add(this.relationTraffic_EventFK_User);
             this.relationMPK_User_RoutesKF_FS_Id = new global::System.Data.DataRelation("MPK_User_RoutesKF_FS_Id", new global::System.Data.DataColumn[] {
                         this.tableStops.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableMPK_User_Routes.First_Stop_IDColumn}, false);
@@ -864,6 +835,14 @@ namespace NetMPK.Service {
                         this.tableMPK_User.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableMPK_User_Routes.UserIDColumn}, false);
             this.Relations.Add(this.relationMPK_User_RoutesKF_User_Id);
+            this.relationTraffic_IncidentFK_StopFrom = new global::System.Data.DataRelation("Traffic_IncidentFK_StopFrom", new global::System.Data.DataColumn[] {
+                        this.tableStops.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableTraffic_Incident.Stop_FromColumn}, false);
+            this.Relations.Add(this.relationTraffic_IncidentFK_StopFrom);
+            this.relationTraffic_IncidentFK_StopTo = new global::System.Data.DataRelation("Traffic_IncidentFK_StopTo", new global::System.Data.DataColumn[] {
+                        this.tableStops.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableTraffic_Incident.Stop_ToColumn}, false);
+            this.Relations.Add(this.relationTraffic_IncidentFK_StopTo);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -881,12 +860,6 @@ namespace NetMPK.Service {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeMPK_User() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeMPK_User_Tracking_Info() {
             return false;
         }
         
@@ -911,12 +884,6 @@ namespace NetMPK.Service {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeStreets() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeTraffic_Event() {
             return false;
         }
         
@@ -1000,6 +967,18 @@ namespace NetMPK.Service {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeTraffic_Incident() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeReference_Points_Distance() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -1063,9 +1042,6 @@ namespace NetMPK.Service {
         public delegate void MPK_UserRowChangeEventHandler(object sender, MPK_UserRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void MPK_User_Tracking_InfoRowChangeEventHandler(object sender, MPK_User_Tracking_InfoRowChangeEvent e);
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void Points_DistanceRowChangeEventHandler(object sender, Points_DistanceRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1076,9 +1052,6 @@ namespace NetMPK.Service {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void StreetsRowChangeEventHandler(object sender, StreetsRowChangeEvent e);
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void Traffic_EventRowChangeEventHandler(object sender, Traffic_EventRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void Desc_Route_PointsRowChangeEventHandler(object sender, Desc_Route_PointsRowChangeEvent e);
@@ -1118,6 +1091,12 @@ namespace NetMPK.Service {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void Desc_MPK_User_RoutesRowChangeEventHandler(object sender, Desc_MPK_User_RoutesRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void Traffic_IncidentRowChangeEventHandler(object sender, Traffic_IncidentRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void Reference_Points_DistanceRowChangeEventHandler(object sender, Reference_Points_DistanceRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2520,310 +2499,6 @@ namespace NetMPK.Service {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class MPK_User_Tracking_InfoDataTable : global::System.Data.TypedTableBase<MPK_User_Tracking_InfoRow> {
-            
-            private global::System.Data.DataColumn columnUserID;
-            
-            private global::System.Data.DataColumn columnX_Coord;
-            
-            private global::System.Data.DataColumn columnY_Coord;
-            
-            private global::System.Data.DataColumn columnIs_Online;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MPK_User_Tracking_InfoDataTable() {
-                this.TableName = "MPK_User_Tracking_Info";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal MPK_User_Tracking_InfoDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected MPK_User_Tracking_InfoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn UserIDColumn {
-                get {
-                    return this.columnUserID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn X_CoordColumn {
-                get {
-                    return this.columnX_Coord;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Y_CoordColumn {
-                get {
-                    return this.columnY_Coord;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Is_OnlineColumn {
-                get {
-                    return this.columnIs_Online;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MPK_User_Tracking_InfoRow this[int index] {
-                get {
-                    return ((MPK_User_Tracking_InfoRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event MPK_User_Tracking_InfoRowChangeEventHandler MPK_User_Tracking_InfoRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event MPK_User_Tracking_InfoRowChangeEventHandler MPK_User_Tracking_InfoRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event MPK_User_Tracking_InfoRowChangeEventHandler MPK_User_Tracking_InfoRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event MPK_User_Tracking_InfoRowChangeEventHandler MPK_User_Tracking_InfoRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddMPK_User_Tracking_InfoRow(MPK_User_Tracking_InfoRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MPK_User_Tracking_InfoRow AddMPK_User_Tracking_InfoRow(MPK_UserRow parentMPK_UserRowByMPK_User_Tracking_InfoFK_User, double X_Coord, double Y_Coord, bool Is_Online) {
-                MPK_User_Tracking_InfoRow rowMPK_User_Tracking_InfoRow = ((MPK_User_Tracking_InfoRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        X_Coord,
-                        Y_Coord,
-                        Is_Online};
-                if ((parentMPK_UserRowByMPK_User_Tracking_InfoFK_User != null)) {
-                    columnValuesArray[0] = parentMPK_UserRowByMPK_User_Tracking_InfoFK_User[0];
-                }
-                rowMPK_User_Tracking_InfoRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowMPK_User_Tracking_InfoRow);
-                return rowMPK_User_Tracking_InfoRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MPK_User_Tracking_InfoRow FindByUserID(int UserID) {
-                return ((MPK_User_Tracking_InfoRow)(this.Rows.Find(new object[] {
-                            UserID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                MPK_User_Tracking_InfoDataTable cln = ((MPK_User_Tracking_InfoDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new MPK_User_Tracking_InfoDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnUserID = base.Columns["UserID"];
-                this.columnX_Coord = base.Columns["X_Coord"];
-                this.columnY_Coord = base.Columns["Y_Coord"];
-                this.columnIs_Online = base.Columns["Is_Online"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnUserID = new global::System.Data.DataColumn("UserID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUserID);
-                this.columnX_Coord = new global::System.Data.DataColumn("X_Coord", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnX_Coord);
-                this.columnY_Coord = new global::System.Data.DataColumn("Y_Coord", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnY_Coord);
-                this.columnIs_Online = new global::System.Data.DataColumn("Is_Online", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIs_Online);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnUserID}, true));
-                this.columnUserID.AllowDBNull = false;
-                this.columnUserID.Unique = true;
-                this.columnIs_Online.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MPK_User_Tracking_InfoRow NewMPK_User_Tracking_InfoRow() {
-                return ((MPK_User_Tracking_InfoRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new MPK_User_Tracking_InfoRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(MPK_User_Tracking_InfoRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.MPK_User_Tracking_InfoRowChanged != null)) {
-                    this.MPK_User_Tracking_InfoRowChanged(this, new MPK_User_Tracking_InfoRowChangeEvent(((MPK_User_Tracking_InfoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.MPK_User_Tracking_InfoRowChanging != null)) {
-                    this.MPK_User_Tracking_InfoRowChanging(this, new MPK_User_Tracking_InfoRowChangeEvent(((MPK_User_Tracking_InfoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.MPK_User_Tracking_InfoRowDeleted != null)) {
-                    this.MPK_User_Tracking_InfoRowDeleted(this, new MPK_User_Tracking_InfoRowChangeEvent(((MPK_User_Tracking_InfoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.MPK_User_Tracking_InfoRowDeleting != null)) {
-                    this.MPK_User_Tracking_InfoRowDeleting(this, new MPK_User_Tracking_InfoRowChangeEvent(((MPK_User_Tracking_InfoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveMPK_User_Tracking_InfoRow(MPK_User_Tracking_InfoRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                MPKDB ds = new MPKDB();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "MPK_User_Tracking_InfoDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class Points_DistanceDataTable : global::System.Data.TypedTableBase<Points_DistanceRow> {
             
             private global::System.Data.DataColumn columnPoint_From;
@@ -4006,411 +3681,6 @@ namespace NetMPK.Service {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "StreetsDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class Traffic_EventDataTable : global::System.Data.TypedTableBase<Traffic_EventRow> {
-            
-            private global::System.Data.DataColumn columnID;
-            
-            private global::System.Data.DataColumn columnType;
-            
-            private global::System.Data.DataColumn columnDate_Added;
-            
-            private global::System.Data.DataColumn columnConfirmations;
-            
-            private global::System.Data.DataColumn columnUser_ID;
-            
-            private global::System.Data.DataColumn columnX_Coord;
-            
-            private global::System.Data.DataColumn columnY_Coord;
-            
-            private global::System.Data.DataColumn columnStop_ID;
-            
-            private global::System.Data.DataColumn columnDirection;
-            
-            private global::System.Data.DataColumn columnLine_ID;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Traffic_EventDataTable() {
-                this.TableName = "Traffic_Event";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal Traffic_EventDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected Traffic_EventDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IDColumn {
-                get {
-                    return this.columnID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn TypeColumn {
-                get {
-                    return this.columnType;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Date_AddedColumn {
-                get {
-                    return this.columnDate_Added;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ConfirmationsColumn {
-                get {
-                    return this.columnConfirmations;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn User_IDColumn {
-                get {
-                    return this.columnUser_ID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn X_CoordColumn {
-                get {
-                    return this.columnX_Coord;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Y_CoordColumn {
-                get {
-                    return this.columnY_Coord;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Stop_IDColumn {
-                get {
-                    return this.columnStop_ID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DirectionColumn {
-                get {
-                    return this.columnDirection;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Line_IDColumn {
-                get {
-                    return this.columnLine_ID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Traffic_EventRow this[int index] {
-                get {
-                    return ((Traffic_EventRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Traffic_EventRowChangeEventHandler Traffic_EventRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Traffic_EventRowChangeEventHandler Traffic_EventRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Traffic_EventRowChangeEventHandler Traffic_EventRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Traffic_EventRowChangeEventHandler Traffic_EventRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddTraffic_EventRow(Traffic_EventRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Traffic_EventRow AddTraffic_EventRow(string Type, System.DateTime Date_Added, int Confirmations, MPK_UserRow parentMPK_UserRowByTraffic_EventFK_User, double X_Coord, double Y_Coord, StopsRow parentStopsRowByTraffic_EventFK_StopID, StopsRow parentStopsRowByTraffic_EventFK_Direction, LinesRow parentLinesRowByTraffic_EventFK_LineID) {
-                Traffic_EventRow rowTraffic_EventRow = ((Traffic_EventRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        Type,
-                        Date_Added,
-                        Confirmations,
-                        null,
-                        X_Coord,
-                        Y_Coord,
-                        null,
-                        null,
-                        null};
-                if ((parentMPK_UserRowByTraffic_EventFK_User != null)) {
-                    columnValuesArray[4] = parentMPK_UserRowByTraffic_EventFK_User[0];
-                }
-                if ((parentStopsRowByTraffic_EventFK_StopID != null)) {
-                    columnValuesArray[7] = parentStopsRowByTraffic_EventFK_StopID[0];
-                }
-                if ((parentStopsRowByTraffic_EventFK_Direction != null)) {
-                    columnValuesArray[8] = parentStopsRowByTraffic_EventFK_Direction[0];
-                }
-                if ((parentLinesRowByTraffic_EventFK_LineID != null)) {
-                    columnValuesArray[9] = parentLinesRowByTraffic_EventFK_LineID[0];
-                }
-                rowTraffic_EventRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowTraffic_EventRow);
-                return rowTraffic_EventRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Traffic_EventRow FindByID(int ID) {
-                return ((Traffic_EventRow)(this.Rows.Find(new object[] {
-                            ID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                Traffic_EventDataTable cln = ((Traffic_EventDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new Traffic_EventDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnID = base.Columns["ID"];
-                this.columnType = base.Columns["Type"];
-                this.columnDate_Added = base.Columns["Date_Added"];
-                this.columnConfirmations = base.Columns["Confirmations"];
-                this.columnUser_ID = base.Columns["User_ID"];
-                this.columnX_Coord = base.Columns["X_Coord"];
-                this.columnY_Coord = base.Columns["Y_Coord"];
-                this.columnStop_ID = base.Columns["Stop_ID"];
-                this.columnDirection = base.Columns["Direction"];
-                this.columnLine_ID = base.Columns["Line_ID"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnID);
-                this.columnType = new global::System.Data.DataColumn("Type", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnType);
-                this.columnDate_Added = new global::System.Data.DataColumn("Date_Added", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDate_Added);
-                this.columnConfirmations = new global::System.Data.DataColumn("Confirmations", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnConfirmations);
-                this.columnUser_ID = new global::System.Data.DataColumn("User_ID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUser_ID);
-                this.columnX_Coord = new global::System.Data.DataColumn("X_Coord", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnX_Coord);
-                this.columnY_Coord = new global::System.Data.DataColumn("Y_Coord", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnY_Coord);
-                this.columnStop_ID = new global::System.Data.DataColumn("Stop_ID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnStop_ID);
-                this.columnDirection = new global::System.Data.DataColumn("Direction", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDirection);
-                this.columnLine_ID = new global::System.Data.DataColumn("Line_ID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLine_ID);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnID}, true));
-                this.columnID.AutoIncrement = true;
-                this.columnID.AutoIncrementSeed = -1;
-                this.columnID.AutoIncrementStep = -1;
-                this.columnID.AllowDBNull = false;
-                this.columnID.ReadOnly = true;
-                this.columnID.Unique = true;
-                this.columnType.AllowDBNull = false;
-                this.columnType.MaxLength = 20;
-                this.columnDate_Added.AllowDBNull = false;
-                this.columnConfirmations.AllowDBNull = false;
-                this.columnUser_ID.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Traffic_EventRow NewTraffic_EventRow() {
-                return ((Traffic_EventRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new Traffic_EventRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(Traffic_EventRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.Traffic_EventRowChanged != null)) {
-                    this.Traffic_EventRowChanged(this, new Traffic_EventRowChangeEvent(((Traffic_EventRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.Traffic_EventRowChanging != null)) {
-                    this.Traffic_EventRowChanging(this, new Traffic_EventRowChangeEvent(((Traffic_EventRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.Traffic_EventRowDeleted != null)) {
-                    this.Traffic_EventRowDeleted(this, new Traffic_EventRowChangeEvent(((Traffic_EventRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.Traffic_EventRowDeleting != null)) {
-                    this.Traffic_EventRowDeleting(this, new Traffic_EventRowChangeEvent(((Traffic_EventRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveTraffic_EventRow(Traffic_EventRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                MPKDB ds = new MPKDB();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "Traffic_EventDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -8646,6 +7916,643 @@ namespace NetMPK.Service {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class Traffic_IncidentDataTable : global::System.Data.TypedTableBase<Traffic_IncidentRow> {
+            
+            private global::System.Data.DataColumn columnID;
+            
+            private global::System.Data.DataColumn columnIncident_Type;
+            
+            private global::System.Data.DataColumn columnDate_Added;
+            
+            private global::System.Data.DataColumn columnStop_From;
+            
+            private global::System.Data.DataColumn columnStop_To;
+            
+            private global::System.Data.DataColumn columnShow_Power;
+            
+            private global::System.Data.DataColumn columnIn_Use;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Traffic_IncidentDataTable() {
+                this.TableName = "Traffic_Incident";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal Traffic_IncidentDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected Traffic_IncidentDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDColumn {
+                get {
+                    return this.columnID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Incident_TypeColumn {
+                get {
+                    return this.columnIncident_Type;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Date_AddedColumn {
+                get {
+                    return this.columnDate_Added;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Stop_FromColumn {
+                get {
+                    return this.columnStop_From;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Stop_ToColumn {
+                get {
+                    return this.columnStop_To;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Show_PowerColumn {
+                get {
+                    return this.columnShow_Power;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn In_UseColumn {
+                get {
+                    return this.columnIn_Use;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Traffic_IncidentRow this[int index] {
+                get {
+                    return ((Traffic_IncidentRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Traffic_IncidentRowChangeEventHandler Traffic_IncidentRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Traffic_IncidentRowChangeEventHandler Traffic_IncidentRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Traffic_IncidentRowChangeEventHandler Traffic_IncidentRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Traffic_IncidentRowChangeEventHandler Traffic_IncidentRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddTraffic_IncidentRow(Traffic_IncidentRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Traffic_IncidentRow AddTraffic_IncidentRow(string Incident_Type, System.DateTime Date_Added, StopsRow parentStopsRowByTraffic_IncidentFK_StopFrom, StopsRow parentStopsRowByTraffic_IncidentFK_StopTo, int Show_Power, bool In_Use) {
+                Traffic_IncidentRow rowTraffic_IncidentRow = ((Traffic_IncidentRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        Incident_Type,
+                        Date_Added,
+                        null,
+                        null,
+                        Show_Power,
+                        In_Use};
+                if ((parentStopsRowByTraffic_IncidentFK_StopFrom != null)) {
+                    columnValuesArray[3] = parentStopsRowByTraffic_IncidentFK_StopFrom[0];
+                }
+                if ((parentStopsRowByTraffic_IncidentFK_StopTo != null)) {
+                    columnValuesArray[4] = parentStopsRowByTraffic_IncidentFK_StopTo[0];
+                }
+                rowTraffic_IncidentRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowTraffic_IncidentRow);
+                return rowTraffic_IncidentRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Traffic_IncidentRow FindByID(int ID) {
+                return ((Traffic_IncidentRow)(this.Rows.Find(new object[] {
+                            ID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                Traffic_IncidentDataTable cln = ((Traffic_IncidentDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new Traffic_IncidentDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnID = base.Columns["ID"];
+                this.columnIncident_Type = base.Columns["Incident_Type"];
+                this.columnDate_Added = base.Columns["Date_Added"];
+                this.columnStop_From = base.Columns["Stop_From"];
+                this.columnStop_To = base.Columns["Stop_To"];
+                this.columnShow_Power = base.Columns["Show_Power"];
+                this.columnIn_Use = base.Columns["In_Use"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID);
+                this.columnIncident_Type = new global::System.Data.DataColumn("Incident_Type", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncident_Type);
+                this.columnDate_Added = new global::System.Data.DataColumn("Date_Added", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate_Added);
+                this.columnStop_From = new global::System.Data.DataColumn("Stop_From", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStop_From);
+                this.columnStop_To = new global::System.Data.DataColumn("Stop_To", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStop_To);
+                this.columnShow_Power = new global::System.Data.DataColumn("Show_Power", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShow_Power);
+                this.columnIn_Use = new global::System.Data.DataColumn("In_Use", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIn_Use);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnID}, true));
+                this.columnID.AutoIncrement = true;
+                this.columnID.AutoIncrementSeed = -1;
+                this.columnID.AutoIncrementStep = -1;
+                this.columnID.AllowDBNull = false;
+                this.columnID.ReadOnly = true;
+                this.columnID.Unique = true;
+                this.columnIncident_Type.AllowDBNull = false;
+                this.columnIncident_Type.MaxLength = 20;
+                this.columnDate_Added.AllowDBNull = false;
+                this.columnStop_From.AllowDBNull = false;
+                this.columnStop_To.AllowDBNull = false;
+                this.columnShow_Power.AllowDBNull = false;
+                this.columnIn_Use.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Traffic_IncidentRow NewTraffic_IncidentRow() {
+                return ((Traffic_IncidentRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new Traffic_IncidentRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(Traffic_IncidentRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.Traffic_IncidentRowChanged != null)) {
+                    this.Traffic_IncidentRowChanged(this, new Traffic_IncidentRowChangeEvent(((Traffic_IncidentRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.Traffic_IncidentRowChanging != null)) {
+                    this.Traffic_IncidentRowChanging(this, new Traffic_IncidentRowChangeEvent(((Traffic_IncidentRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.Traffic_IncidentRowDeleted != null)) {
+                    this.Traffic_IncidentRowDeleted(this, new Traffic_IncidentRowChangeEvent(((Traffic_IncidentRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.Traffic_IncidentRowDeleting != null)) {
+                    this.Traffic_IncidentRowDeleting(this, new Traffic_IncidentRowChangeEvent(((Traffic_IncidentRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveTraffic_IncidentRow(Traffic_IncidentRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                MPKDB ds = new MPKDB();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "Traffic_IncidentDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class Reference_Points_DistanceDataTable : global::System.Data.TypedTableBase<Reference_Points_DistanceRow> {
+            
+            private global::System.Data.DataColumn columnPoint_From;
+            
+            private global::System.Data.DataColumn columnPoint_To;
+            
+            private global::System.Data.DataColumn columnDistance;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Reference_Points_DistanceDataTable() {
+                this.TableName = "Reference_Points_Distance";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal Reference_Points_DistanceDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected Reference_Points_DistanceDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Point_FromColumn {
+                get {
+                    return this.columnPoint_From;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Point_ToColumn {
+                get {
+                    return this.columnPoint_To;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DistanceColumn {
+                get {
+                    return this.columnDistance;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Reference_Points_DistanceRow this[int index] {
+                get {
+                    return ((Reference_Points_DistanceRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Reference_Points_DistanceRowChangeEventHandler Reference_Points_DistanceRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Reference_Points_DistanceRowChangeEventHandler Reference_Points_DistanceRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Reference_Points_DistanceRowChangeEventHandler Reference_Points_DistanceRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Reference_Points_DistanceRowChangeEventHandler Reference_Points_DistanceRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddReference_Points_DistanceRow(Reference_Points_DistanceRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Reference_Points_DistanceRow AddReference_Points_DistanceRow(int Point_From, int Point_To, int Distance) {
+                Reference_Points_DistanceRow rowReference_Points_DistanceRow = ((Reference_Points_DistanceRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        Point_From,
+                        Point_To,
+                        Distance};
+                rowReference_Points_DistanceRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowReference_Points_DistanceRow);
+                return rowReference_Points_DistanceRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                Reference_Points_DistanceDataTable cln = ((Reference_Points_DistanceDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new Reference_Points_DistanceDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnPoint_From = base.Columns["Point_From"];
+                this.columnPoint_To = base.Columns["Point_To"];
+                this.columnDistance = base.Columns["Distance"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnPoint_From = new global::System.Data.DataColumn("Point_From", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPoint_From);
+                this.columnPoint_To = new global::System.Data.DataColumn("Point_To", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPoint_To);
+                this.columnDistance = new global::System.Data.DataColumn("Distance", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDistance);
+                this.columnPoint_From.AllowDBNull = false;
+                this.columnPoint_To.AllowDBNull = false;
+                this.columnDistance.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Reference_Points_DistanceRow NewReference_Points_DistanceRow() {
+                return ((Reference_Points_DistanceRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new Reference_Points_DistanceRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(Reference_Points_DistanceRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.Reference_Points_DistanceRowChanged != null)) {
+                    this.Reference_Points_DistanceRowChanged(this, new Reference_Points_DistanceRowChangeEvent(((Reference_Points_DistanceRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.Reference_Points_DistanceRowChanging != null)) {
+                    this.Reference_Points_DistanceRowChanging(this, new Reference_Points_DistanceRowChangeEvent(((Reference_Points_DistanceRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.Reference_Points_DistanceRowDeleted != null)) {
+                    this.Reference_Points_DistanceRowDeleted(this, new Reference_Points_DistanceRowChangeEvent(((Reference_Points_DistanceRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.Reference_Points_DistanceRowDeleting != null)) {
+                    this.Reference_Points_DistanceRowDeleting(this, new Reference_Points_DistanceRowChangeEvent(((Reference_Points_DistanceRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveReference_Points_DistanceRow(Reference_Points_DistanceRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                MPKDB ds = new MPKDB();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "Reference_Points_DistanceDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class Line_DeparturesRow : global::System.Data.DataRow {
@@ -9488,17 +9395,6 @@ namespace NetMPK.Service {
                     return ((Route_PointsRow[])(base.GetChildRows(this.Table.ChildRelations["Route_PointFK_LineID"])));
                 }
             }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Traffic_EventRow[] GetTraffic_EventRows() {
-                if ((this.Table.ChildRelations["Traffic_EventFK_LineID"] == null)) {
-                    return new Traffic_EventRow[0];
-                }
-                else {
-                    return ((Traffic_EventRow[])(base.GetChildRows(this.Table.ChildRelations["Traffic_EventFK_LineID"])));
-                }
-            }
         }
         
         /// <summary>
@@ -9622,28 +9518,6 @@ namespace NetMPK.Service {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MPK_User_Tracking_InfoRow[] GetMPK_User_Tracking_InfoRows() {
-                if ((this.Table.ChildRelations["MPK_User_Tracking_InfoFK_User"] == null)) {
-                    return new MPK_User_Tracking_InfoRow[0];
-                }
-                else {
-                    return ((MPK_User_Tracking_InfoRow[])(base.GetChildRows(this.Table.ChildRelations["MPK_User_Tracking_InfoFK_User"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Traffic_EventRow[] GetTraffic_EventRows() {
-                if ((this.Table.ChildRelations["Traffic_EventFK_User"] == null)) {
-                    return new Traffic_EventRow[0];
-                }
-                else {
-                    return ((Traffic_EventRow[])(base.GetChildRows(this.Table.ChildRelations["Traffic_EventFK_User"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public MPK_User_RoutesRow[] GetMPK_User_RoutesRows() {
                 if ((this.Table.ChildRelations["MPK_User_RoutesKF_User_Id"] == null)) {
                     return new MPK_User_RoutesRow[0];
@@ -9651,110 +9525,6 @@ namespace NetMPK.Service {
                 else {
                     return ((MPK_User_RoutesRow[])(base.GetChildRows(this.Table.ChildRelations["MPK_User_RoutesKF_User_Id"])));
                 }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class MPK_User_Tracking_InfoRow : global::System.Data.DataRow {
-            
-            private MPK_User_Tracking_InfoDataTable tableMPK_User_Tracking_Info;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal MPK_User_Tracking_InfoRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableMPK_User_Tracking_Info = ((MPK_User_Tracking_InfoDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int UserID {
-                get {
-                    return ((int)(this[this.tableMPK_User_Tracking_Info.UserIDColumn]));
-                }
-                set {
-                    this[this.tableMPK_User_Tracking_Info.UserIDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double X_Coord {
-                get {
-                    try {
-                        return ((double)(this[this.tableMPK_User_Tracking_Info.X_CoordColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'X_Coord\' in table \'MPK_User_Tracking_Info\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMPK_User_Tracking_Info.X_CoordColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double Y_Coord {
-                get {
-                    try {
-                        return ((double)(this[this.tableMPK_User_Tracking_Info.Y_CoordColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Y_Coord\' in table \'MPK_User_Tracking_Info\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMPK_User_Tracking_Info.Y_CoordColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Is_Online {
-                get {
-                    return ((bool)(this[this.tableMPK_User_Tracking_Info.Is_OnlineColumn]));
-                }
-                set {
-                    this[this.tableMPK_User_Tracking_Info.Is_OnlineColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MPK_UserRow MPK_UserRow {
-                get {
-                    return ((MPK_UserRow)(this.GetParentRow(this.Table.ParentRelations["MPK_User_Tracking_InfoFK_User"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["MPK_User_Tracking_InfoFK_User"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsX_CoordNull() {
-                return this.IsNull(this.tableMPK_User_Tracking_Info.X_CoordColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetX_CoordNull() {
-                this[this.tableMPK_User_Tracking_Info.X_CoordColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsY_CoordNull() {
-                return this.IsNull(this.tableMPK_User_Tracking_Info.Y_CoordColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetY_CoordNull() {
-                this[this.tableMPK_User_Tracking_Info.Y_CoordColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -10119,28 +9889,6 @@ namespace NetMPK.Service {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Traffic_EventRow[] GetTraffic_EventRowsByTraffic_EventFK_Direction() {
-                if ((this.Table.ChildRelations["Traffic_EventFK_Direction"] == null)) {
-                    return new Traffic_EventRow[0];
-                }
-                else {
-                    return ((Traffic_EventRow[])(base.GetChildRows(this.Table.ChildRelations["Traffic_EventFK_Direction"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Traffic_EventRow[] GetTraffic_EventRowsByTraffic_EventFK_StopID() {
-                if ((this.Table.ChildRelations["Traffic_EventFK_StopID"] == null)) {
-                    return new Traffic_EventRow[0];
-                }
-                else {
-                    return ((Traffic_EventRow[])(base.GetChildRows(this.Table.ChildRelations["Traffic_EventFK_StopID"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public MPK_User_RoutesRow[] GetMPK_User_RoutesRowsByMPK_User_RoutesKF_FS_Id() {
                 if ((this.Table.ChildRelations["MPK_User_RoutesKF_FS_Id"] == null)) {
                     return new MPK_User_RoutesRow[0];
@@ -10158,6 +9906,28 @@ namespace NetMPK.Service {
                 }
                 else {
                     return ((MPK_User_RoutesRow[])(base.GetChildRows(this.Table.ChildRelations["MPK_User_RoutesKF_LS_Id"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Traffic_IncidentRow[] GetTraffic_IncidentRowsByTraffic_IncidentFK_StopFrom() {
+                if ((this.Table.ChildRelations["Traffic_IncidentFK_StopFrom"] == null)) {
+                    return new Traffic_IncidentRow[0];
+                }
+                else {
+                    return ((Traffic_IncidentRow[])(base.GetChildRows(this.Table.ChildRelations["Traffic_IncidentFK_StopFrom"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Traffic_IncidentRow[] GetTraffic_IncidentRowsByTraffic_IncidentFK_StopTo() {
+                if ((this.Table.ChildRelations["Traffic_IncidentFK_StopTo"] == null)) {
+                    return new Traffic_IncidentRow[0];
+                }
+                else {
+                    return ((Traffic_IncidentRow[])(base.GetChildRows(this.Table.ChildRelations["Traffic_IncidentFK_StopTo"])));
                 }
             }
         }
@@ -10207,260 +9977,6 @@ namespace NetMPK.Service {
                 else {
                     return ((StopsRow[])(base.GetChildRows(this.Table.ChildRelations["StopFK_StreetID"])));
                 }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class Traffic_EventRow : global::System.Data.DataRow {
-            
-            private Traffic_EventDataTable tableTraffic_Event;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal Traffic_EventRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableTraffic_Event = ((Traffic_EventDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int ID {
-                get {
-                    return ((int)(this[this.tableTraffic_Event.IDColumn]));
-                }
-                set {
-                    this[this.tableTraffic_Event.IDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Type {
-                get {
-                    return ((string)(this[this.tableTraffic_Event.TypeColumn]));
-                }
-                set {
-                    this[this.tableTraffic_Event.TypeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime Date_Added {
-                get {
-                    return ((global::System.DateTime)(this[this.tableTraffic_Event.Date_AddedColumn]));
-                }
-                set {
-                    this[this.tableTraffic_Event.Date_AddedColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Confirmations {
-                get {
-                    return ((int)(this[this.tableTraffic_Event.ConfirmationsColumn]));
-                }
-                set {
-                    this[this.tableTraffic_Event.ConfirmationsColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int User_ID {
-                get {
-                    return ((int)(this[this.tableTraffic_Event.User_IDColumn]));
-                }
-                set {
-                    this[this.tableTraffic_Event.User_IDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double X_Coord {
-                get {
-                    try {
-                        return ((double)(this[this.tableTraffic_Event.X_CoordColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'X_Coord\' in table \'Traffic_Event\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableTraffic_Event.X_CoordColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double Y_Coord {
-                get {
-                    try {
-                        return ((double)(this[this.tableTraffic_Event.Y_CoordColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Y_Coord\' in table \'Traffic_Event\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableTraffic_Event.Y_CoordColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Stop_ID {
-                get {
-                    try {
-                        return ((int)(this[this.tableTraffic_Event.Stop_IDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Stop_ID\' in table \'Traffic_Event\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableTraffic_Event.Stop_IDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Direction {
-                get {
-                    try {
-                        return ((int)(this[this.tableTraffic_Event.DirectionColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Direction\' in table \'Traffic_Event\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableTraffic_Event.DirectionColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Line_ID {
-                get {
-                    try {
-                        return ((int)(this[this.tableTraffic_Event.Line_IDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Line_ID\' in table \'Traffic_Event\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableTraffic_Event.Line_IDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public StopsRow StopsRowByTraffic_EventFK_Direction {
-                get {
-                    return ((StopsRow)(this.GetParentRow(this.Table.ParentRelations["Traffic_EventFK_Direction"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["Traffic_EventFK_Direction"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LinesRow LinesRow {
-                get {
-                    return ((LinesRow)(this.GetParentRow(this.Table.ParentRelations["Traffic_EventFK_LineID"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["Traffic_EventFK_LineID"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public StopsRow StopsRowByTraffic_EventFK_StopID {
-                get {
-                    return ((StopsRow)(this.GetParentRow(this.Table.ParentRelations["Traffic_EventFK_StopID"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["Traffic_EventFK_StopID"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MPK_UserRow MPK_UserRow {
-                get {
-                    return ((MPK_UserRow)(this.GetParentRow(this.Table.ParentRelations["Traffic_EventFK_User"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["Traffic_EventFK_User"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsX_CoordNull() {
-                return this.IsNull(this.tableTraffic_Event.X_CoordColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetX_CoordNull() {
-                this[this.tableTraffic_Event.X_CoordColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsY_CoordNull() {
-                return this.IsNull(this.tableTraffic_Event.Y_CoordColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetY_CoordNull() {
-                this[this.tableTraffic_Event.Y_CoordColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsStop_IDNull() {
-                return this.IsNull(this.tableTraffic_Event.Stop_IDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetStop_IDNull() {
-                this[this.tableTraffic_Event.Stop_IDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDirectionNull() {
-                return this.IsNull(this.tableTraffic_Event.DirectionColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDirectionNull() {
-                this[this.tableTraffic_Event.DirectionColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsLine_IDNull() {
-                return this.IsNull(this.tableTraffic_Event.Line_IDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetLine_IDNull() {
-                this[this.tableTraffic_Event.Line_IDColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -12404,6 +11920,168 @@ namespace NetMPK.Service {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class Traffic_IncidentRow : global::System.Data.DataRow {
+            
+            private Traffic_IncidentDataTable tableTraffic_Incident;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal Traffic_IncidentRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableTraffic_Incident = ((Traffic_IncidentDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ID {
+                get {
+                    return ((int)(this[this.tableTraffic_Incident.IDColumn]));
+                }
+                set {
+                    this[this.tableTraffic_Incident.IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Incident_Type {
+                get {
+                    return ((string)(this[this.tableTraffic_Incident.Incident_TypeColumn]));
+                }
+                set {
+                    this[this.tableTraffic_Incident.Incident_TypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime Date_Added {
+                get {
+                    return ((global::System.DateTime)(this[this.tableTraffic_Incident.Date_AddedColumn]));
+                }
+                set {
+                    this[this.tableTraffic_Incident.Date_AddedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Stop_From {
+                get {
+                    return ((int)(this[this.tableTraffic_Incident.Stop_FromColumn]));
+                }
+                set {
+                    this[this.tableTraffic_Incident.Stop_FromColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Stop_To {
+                get {
+                    return ((int)(this[this.tableTraffic_Incident.Stop_ToColumn]));
+                }
+                set {
+                    this[this.tableTraffic_Incident.Stop_ToColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Show_Power {
+                get {
+                    return ((int)(this[this.tableTraffic_Incident.Show_PowerColumn]));
+                }
+                set {
+                    this[this.tableTraffic_Incident.Show_PowerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool In_Use {
+                get {
+                    return ((bool)(this[this.tableTraffic_Incident.In_UseColumn]));
+                }
+                set {
+                    this[this.tableTraffic_Incident.In_UseColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public StopsRow StopsRowByTraffic_IncidentFK_StopFrom {
+                get {
+                    return ((StopsRow)(this.GetParentRow(this.Table.ParentRelations["Traffic_IncidentFK_StopFrom"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Traffic_IncidentFK_StopFrom"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public StopsRow StopsRowByTraffic_IncidentFK_StopTo {
+                get {
+                    return ((StopsRow)(this.GetParentRow(this.Table.ParentRelations["Traffic_IncidentFK_StopTo"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Traffic_IncidentFK_StopTo"]);
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class Reference_Points_DistanceRow : global::System.Data.DataRow {
+            
+            private Reference_Points_DistanceDataTable tableReference_Points_Distance;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal Reference_Points_DistanceRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableReference_Points_Distance = ((Reference_Points_DistanceDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Point_From {
+                get {
+                    return ((int)(this[this.tableReference_Points_Distance.Point_FromColumn]));
+                }
+                set {
+                    this[this.tableReference_Points_Distance.Point_FromColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Point_To {
+                get {
+                    return ((int)(this[this.tableReference_Points_Distance.Point_ToColumn]));
+                }
+                set {
+                    this[this.tableReference_Points_Distance.Point_ToColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Distance {
+                get {
+                    return ((int)(this[this.tableReference_Points_Distance.DistanceColumn]));
+                }
+                set {
+                    this[this.tableReference_Points_Distance.DistanceColumn] = value;
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -12491,40 +12169,6 @@ namespace NetMPK.Service {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public MPK_UserRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class MPK_User_Tracking_InfoRowChangeEvent : global::System.EventArgs {
-            
-            private MPK_User_Tracking_InfoRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MPK_User_Tracking_InfoRowChangeEvent(MPK_User_Tracking_InfoRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MPK_User_Tracking_InfoRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -12661,40 +12305,6 @@ namespace NetMPK.Service {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public StreetsRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class Traffic_EventRowChangeEvent : global::System.EventArgs {
-            
-            private Traffic_EventRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Traffic_EventRowChangeEvent(Traffic_EventRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Traffic_EventRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -13137,6 +12747,74 @@ namespace NetMPK.Service {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public Desc_MPK_User_RoutesRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class Traffic_IncidentRowChangeEvent : global::System.EventArgs {
+            
+            private Traffic_IncidentRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Traffic_IncidentRowChangeEvent(Traffic_IncidentRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Traffic_IncidentRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class Reference_Points_DistanceRowChangeEvent : global::System.EventArgs {
+            
+            private Reference_Points_DistanceRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Reference_Points_DistanceRowChangeEvent(Reference_Points_DistanceRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Reference_Points_DistanceRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -15149,7 +14827,7 @@ SELECT ID, Login, Nick, Password, Email, Avatar, Privlidge_level, Trust_Lvl FROM
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, Login, Nick, Password, Email, Avatar, Privlidge_level, Trust_Lvl FROM " +
@@ -15157,16 +14835,21 @@ SELECT ID, Login, Nick, Password, Email, Avatar, Privlidge_level, Trust_Lvl FROM
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT ID, Trust_Lvl FROM MPK_User WHERE (Login = @Login) AND (Password = @Passwo" +
-                "rd)";
+            this._commandCollection[1].CommandText = "SELECT        Trust_Lvl\r\nFROM            MPK_User\r\nWHERE        (ID = @UserId)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.VarChar, 25, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.VarChar, 250, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UserId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT Password, Trust_Lvl FROM MPK_User WHERE (Login = @Login)";
+            this._commandCollection[2].CommandText = "SELECT ID, Trust_Lvl FROM MPK_User WHERE (Login = @Login) AND (Password = @Passwo" +
+                "rd)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.VarChar, 25, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.VarChar, 250, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT Password, Trust_Lvl FROM MPK_User WHERE (Login = @Login)";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.VarChar, 25, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15415,8 +15098,37 @@ SELECT ID, Login, Nick, Password, Email, Avatar, Privlidge_level, Trust_Lvl FROM
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual global::System.Nullable<int> GetUserId(string Login, string Password) {
+        public virtual global::System.Nullable<int> GetTrustLvl(int UserId) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(UserId));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> GetUserId(string Login, string Password) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
             if ((Login == null)) {
                 throw new global::System.ArgumentNullException("Login");
             }
@@ -15456,7 +15168,7 @@ SELECT ID, Login, Nick, Password, Email, Avatar, Privlidge_level, Trust_Lvl FROM
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual string GetUserPassword(string Login) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
             if ((Login == null)) {
                 throw new global::System.ArgumentNullException("Login");
             }
@@ -15484,375 +15196,6 @@ SELECT ID, Login, Nick, Password, Email, Avatar, Privlidge_level, Trust_Lvl FROM
             else {
                 return ((string)(returnValue));
             }
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class MPK_User_Tracking_InfoTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public MPK_User_Tracking_InfoTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "MPK_User_Tracking_Info";
-            tableMapping.ColumnMappings.Add("UserID", "UserID");
-            tableMapping.ColumnMappings.Add("X_Coord", "X_Coord");
-            tableMapping.ColumnMappings.Add("Y_Coord", "Y_Coord");
-            tableMapping.ColumnMappings.Add("Is_Online", "Is_Online");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[MPK_User_Tracking_Info] WHERE (([UserID] = @Original_UserID) AND ((@IsNull_X_Coord = 1 AND [X_Coord] IS NULL) OR ([X_Coord] = @Original_X_Coord)) AND ((@IsNull_Y_Coord = 1 AND [Y_Coord] IS NULL) OR ([Y_Coord] = @Original_Y_Coord)) AND ([Is_Online] = @Original_Is_Online))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_X_Coord", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_X_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Y_Coord", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Y_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Is_Online", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Is_Online", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[MPK_User_Tracking_Info] ([UserID], [X_Coord], [Y_Coord], [Is_O" +
-                "nline]) VALUES (@UserID, @X_Coord, @Y_Coord, @Is_Online);\r\nSELECT UserID, X_Coor" +
-                "d, Y_Coord, Is_Online FROM MPK_User_Tracking_Info WHERE (UserID = @UserID)";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@X_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Y_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Is_Online", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Is_Online", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[MPK_User_Tracking_Info] SET [UserID] = @UserID, [X_Coord] = @X_Coord, [Y_Coord] = @Y_Coord, [Is_Online] = @Is_Online WHERE (([UserID] = @Original_UserID) AND ((@IsNull_X_Coord = 1 AND [X_Coord] IS NULL) OR ([X_Coord] = @Original_X_Coord)) AND ((@IsNull_Y_Coord = 1 AND [Y_Coord] IS NULL) OR ([Y_Coord] = @Original_Y_Coord)) AND ([Is_Online] = @Original_Is_Online));
-SELECT UserID, X_Coord, Y_Coord, Is_Online FROM MPK_User_Tracking_Info WHERE (UserID = @UserID)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@X_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Y_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Is_Online", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Is_Online", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_X_Coord", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_X_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Y_Coord", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Y_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Is_Online", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Is_Online", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::NetMPK.Service.Properties.Settings.Default.NetMPKDBConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT UserID, X_Coord, Y_Coord, Is_Online FROM dbo.MPK_User_Tracking_Info";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(MPKDB.MPK_User_Tracking_InfoDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual MPKDB.MPK_User_Tracking_InfoDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            MPKDB.MPK_User_Tracking_InfoDataTable dataTable = new MPKDB.MPK_User_Tracking_InfoDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(MPKDB.MPK_User_Tracking_InfoDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(MPKDB dataSet) {
-            return this.Adapter.Update(dataSet, "MPK_User_Tracking_Info");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_UserID, global::System.Nullable<double> Original_X_Coord, global::System.Nullable<double> Original_Y_Coord, bool Original_Is_Online) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_UserID));
-            if ((Original_X_Coord.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((double)(Original_X_Coord.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Y_Coord.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((double)(Original_Y_Coord.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((bool)(Original_Is_Online));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int UserID, global::System.Nullable<double> X_Coord, global::System.Nullable<double> Y_Coord, bool Is_Online) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(UserID));
-            if ((X_Coord.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((double)(X_Coord.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((Y_Coord.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((double)(Y_Coord.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.InsertCommand.Parameters[3].Value = ((bool)(Is_Online));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int UserID, global::System.Nullable<double> X_Coord, global::System.Nullable<double> Y_Coord, bool Is_Online, int Original_UserID, global::System.Nullable<double> Original_X_Coord, global::System.Nullable<double> Original_Y_Coord, bool Original_Is_Online) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(UserID));
-            if ((X_Coord.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((double)(X_Coord.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((Y_Coord.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((double)(Y_Coord.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((bool)(Is_Online));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_UserID));
-            if ((Original_X_Coord.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((double)(Original_X_Coord.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Y_Coord.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((double)(Original_Y_Coord.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((bool)(Original_Is_Online));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<double> X_Coord, global::System.Nullable<double> Y_Coord, bool Is_Online, int Original_UserID, global::System.Nullable<double> Original_X_Coord, global::System.Nullable<double> Original_Y_Coord, bool Original_Is_Online) {
-            return this.Update(Original_UserID, X_Coord, Y_Coord, Is_Online, Original_UserID, Original_X_Coord, Original_Y_Coord, Original_Is_Online);
         }
     }
     
@@ -16021,11 +15364,19 @@ SELECT Point_From, Point_To, Distance FROM Points_Distance WHERE (Point_From = @
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Point_From, Point_To, Distance FROM dbo.Points_Distance";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT        Point_From, Point_To, Distance\r\nFROM            Points_Distance\r\nWH" +
+                "ERE        (Point_From = @PointFrom) AND (Point_To = @PointTo) OR\r\n             " +
+                "            (Point_From = @PointTo) AND (Point_To = @PointFrom)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PointFrom", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Point_From", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PointTo", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Point_To", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16047,6 +15398,19 @@ SELECT Point_From, Point_To, Distance FROM Points_Distance WHERE (Point_From = @
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual MPKDB.Points_DistanceDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            MPKDB.Points_DistanceDataTable dataTable = new MPKDB.Points_DistanceDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual MPKDB.Points_DistanceDataTable GetDataByPoints(int PointFrom, int PointTo) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(PointFrom));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((int)(PointTo));
             MPKDB.Points_DistanceDataTable dataTable = new MPKDB.Points_DistanceDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -17532,564 +16896,6 @@ WHERE        (Stop_Name IN
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(string Street_Name, int Original_ID, string Original_Street_Name) {
             return this.Update(Street_Name, Original_ID, Original_Street_Name, Original_ID);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class Traffic_EventTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public Traffic_EventTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Traffic_Event";
-            tableMapping.ColumnMappings.Add("ID", "ID");
-            tableMapping.ColumnMappings.Add("Type", "Type");
-            tableMapping.ColumnMappings.Add("Date_Added", "Date_Added");
-            tableMapping.ColumnMappings.Add("Confirmations", "Confirmations");
-            tableMapping.ColumnMappings.Add("User_ID", "User_ID");
-            tableMapping.ColumnMappings.Add("X_Coord", "X_Coord");
-            tableMapping.ColumnMappings.Add("Y_Coord", "Y_Coord");
-            tableMapping.ColumnMappings.Add("Stop_ID", "Stop_ID");
-            tableMapping.ColumnMappings.Add("Direction", "Direction");
-            tableMapping.ColumnMappings.Add("Line_ID", "Line_ID");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Traffic_Event] WHERE (([ID] = @Original_ID) AND ([Type] = @Original_Type) AND ([Date_Added] = @Original_Date_Added) AND ([Confirmations] = @Original_Confirmations) AND ([User_ID] = @Original_User_ID) AND ((@IsNull_X_Coord = 1 AND [X_Coord] IS NULL) OR ([X_Coord] = @Original_X_Coord)) AND ((@IsNull_Y_Coord = 1 AND [Y_Coord] IS NULL) OR ([Y_Coord] = @Original_Y_Coord)) AND ((@IsNull_Stop_ID = 1 AND [Stop_ID] IS NULL) OR ([Stop_ID] = @Original_Stop_ID)) AND ((@IsNull_Direction = 1 AND [Direction] IS NULL) OR ([Direction] = @Original_Direction)) AND ((@IsNull_Line_ID = 1 AND [Line_ID] IS NULL) OR ([Line_ID] = @Original_Line_ID)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Type", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date_Added", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date_Added", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Confirmations", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Confirmations", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_User_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "User_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_X_Coord", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_X_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Y_Coord", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Y_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Stop_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_ID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Stop_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Direction", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Direction", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Direction", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Direction", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Line_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Line_ID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Line_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Line_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Traffic_Event] ([Type], [Date_Added], [Confirmations], [User_ID], [X_Coord], [Y_Coord], [Stop_ID], [Direction], [Line_ID]) VALUES (@Type, @Date_Added, @Confirmations, @User_ID, @X_Coord, @Y_Coord, @Stop_ID, @Direction, @Line_ID);
-SELECT ID, Type, Date_Added, Confirmations, User_ID, X_Coord, Y_Coord, Stop_ID, Direction, Line_ID FROM Traffic_Event WHERE (ID = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Type", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date_Added", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date_Added", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Confirmations", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Confirmations", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@User_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "User_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@X_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Y_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Stop_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Direction", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Direction", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Line_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Line_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Traffic_Event] SET [Type] = @Type, [Date_Added] = @Date_Added, [Confirmations] = @Confirmations, [User_ID] = @User_ID, [X_Coord] = @X_Coord, [Y_Coord] = @Y_Coord, [Stop_ID] = @Stop_ID, [Direction] = @Direction, [Line_ID] = @Line_ID WHERE (([ID] = @Original_ID) AND ([Type] = @Original_Type) AND ([Date_Added] = @Original_Date_Added) AND ([Confirmations] = @Original_Confirmations) AND ([User_ID] = @Original_User_ID) AND ((@IsNull_X_Coord = 1 AND [X_Coord] IS NULL) OR ([X_Coord] = @Original_X_Coord)) AND ((@IsNull_Y_Coord = 1 AND [Y_Coord] IS NULL) OR ([Y_Coord] = @Original_Y_Coord)) AND ((@IsNull_Stop_ID = 1 AND [Stop_ID] IS NULL) OR ([Stop_ID] = @Original_Stop_ID)) AND ((@IsNull_Direction = 1 AND [Direction] IS NULL) OR ([Direction] = @Original_Direction)) AND ((@IsNull_Line_ID = 1 AND [Line_ID] IS NULL) OR ([Line_ID] = @Original_Line_ID)));
-SELECT ID, Type, Date_Added, Confirmations, User_ID, X_Coord, Y_Coord, Stop_ID, Direction, Line_ID FROM Traffic_Event WHERE (ID = @ID)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Type", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date_Added", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date_Added", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Confirmations", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Confirmations", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@User_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "User_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@X_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Y_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Stop_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Direction", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Direction", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Line_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Line_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Type", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date_Added", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date_Added", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Confirmations", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Confirmations", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_User_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "User_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_X_Coord", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_X_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "X_Coord", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Y_Coord", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Y_Coord", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Y_Coord", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Stop_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_ID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Stop_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Direction", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Direction", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Direction", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Direction", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Line_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Line_ID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Line_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Line_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::NetMPK.Service.Properties.Settings.Default.NetMPKDBConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT ID, Type, Date_Added, Confirmations, User_ID, X_Coord, Y_Coord, Stop_ID, D" +
-                "irection, Line_ID FROM dbo.Traffic_Event";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(MPKDB.Traffic_EventDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual MPKDB.Traffic_EventDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            MPKDB.Traffic_EventDataTable dataTable = new MPKDB.Traffic_EventDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(MPKDB.Traffic_EventDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(MPKDB dataSet) {
-            return this.Adapter.Update(dataSet, "Traffic_Event");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_Type, System.DateTime Original_Date_Added, int Original_Confirmations, int Original_User_ID, global::System.Nullable<double> Original_X_Coord, global::System.Nullable<double> Original_Y_Coord, global::System.Nullable<int> Original_Stop_ID, global::System.Nullable<int> Original_Direction, global::System.Nullable<int> Original_Line_ID) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_Type == null)) {
-                throw new global::System.ArgumentNullException("Original_Type");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_Type));
-            }
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_Date_Added));
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_Confirmations));
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_User_ID));
-            if ((Original_X_Coord.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((double)(Original_X_Coord.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Y_Coord.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((double)(Original_Y_Coord.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Stop_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_Stop_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Direction.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((int)(Original_Direction.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Line_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((int)(Original_Line_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Type, System.DateTime Date_Added, int Confirmations, int User_ID, global::System.Nullable<double> X_Coord, global::System.Nullable<double> Y_Coord, global::System.Nullable<int> Stop_ID, global::System.Nullable<int> Direction, global::System.Nullable<int> Line_ID) {
-            if ((Type == null)) {
-                throw new global::System.ArgumentNullException("Type");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Type));
-            }
-            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(Date_Added));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(Confirmations));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(User_ID));
-            if ((X_Coord.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((double)(X_Coord.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Y_Coord.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((double)(Y_Coord.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((Stop_ID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((int)(Stop_ID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Direction.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(Direction.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Line_ID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(Line_ID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string Type, 
-                    System.DateTime Date_Added, 
-                    int Confirmations, 
-                    int User_ID, 
-                    global::System.Nullable<double> X_Coord, 
-                    global::System.Nullable<double> Y_Coord, 
-                    global::System.Nullable<int> Stop_ID, 
-                    global::System.Nullable<int> Direction, 
-                    global::System.Nullable<int> Line_ID, 
-                    int Original_ID, 
-                    string Original_Type, 
-                    System.DateTime Original_Date_Added, 
-                    int Original_Confirmations, 
-                    int Original_User_ID, 
-                    global::System.Nullable<double> Original_X_Coord, 
-                    global::System.Nullable<double> Original_Y_Coord, 
-                    global::System.Nullable<int> Original_Stop_ID, 
-                    global::System.Nullable<int> Original_Direction, 
-                    global::System.Nullable<int> Original_Line_ID, 
-                    int ID) {
-            if ((Type == null)) {
-                throw new global::System.ArgumentNullException("Type");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(Type));
-            }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(Date_Added));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Confirmations));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(User_ID));
-            if ((X_Coord.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((double)(X_Coord.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Y_Coord.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((double)(Y_Coord.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((Stop_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Stop_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Direction.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Direction.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Line_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Line_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_ID));
-            if ((Original_Type == null)) {
-                throw new global::System.ArgumentNullException("Original_Type");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_Type));
-            }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_Date_Added));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_Confirmations));
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_User_ID));
-            if ((Original_X_Coord.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((double)(Original_X_Coord.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Y_Coord.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((double)(Original_Y_Coord.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Stop_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_Stop_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Direction.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_Direction.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Line_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((int)(Original_Line_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(ID));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string Type, 
-                    System.DateTime Date_Added, 
-                    int Confirmations, 
-                    int User_ID, 
-                    global::System.Nullable<double> X_Coord, 
-                    global::System.Nullable<double> Y_Coord, 
-                    global::System.Nullable<int> Stop_ID, 
-                    global::System.Nullable<int> Direction, 
-                    global::System.Nullable<int> Line_ID, 
-                    int Original_ID, 
-                    string Original_Type, 
-                    System.DateTime Original_Date_Added, 
-                    int Original_Confirmations, 
-                    int Original_User_ID, 
-                    global::System.Nullable<double> Original_X_Coord, 
-                    global::System.Nullable<double> Original_Y_Coord, 
-                    global::System.Nullable<int> Original_Stop_ID, 
-                    global::System.Nullable<int> Original_Direction, 
-                    global::System.Nullable<int> Original_Line_ID) {
-            return this.Update(Type, Date_Added, Confirmations, User_ID, X_Coord, Y_Coord, Stop_ID, Direction, Line_ID, Original_ID, Original_Type, Original_Date_Added, Original_Confirmations, Original_User_ID, Original_X_Coord, Original_Y_Coord, Original_Stop_ID, Original_Direction, Original_Line_ID, Original_ID);
         }
     }
     
@@ -21081,6 +19887,664 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class Traffic_IncidentTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public Traffic_IncidentTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "Traffic_Incident";
+            tableMapping.ColumnMappings.Add("ID", "ID");
+            tableMapping.ColumnMappings.Add("Incident_Type", "Incident_Type");
+            tableMapping.ColumnMappings.Add("Date_Added", "Date_Added");
+            tableMapping.ColumnMappings.Add("Stop_From", "Stop_From");
+            tableMapping.ColumnMappings.Add("Stop_To", "Stop_To");
+            tableMapping.ColumnMappings.Add("Show_Power", "Show_Power");
+            tableMapping.ColumnMappings.Add("In_Use", "In_Use");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Traffic_Incident] WHERE (([ID] = @Original_ID) AND ([Incident_Type] = @Original_Incident_Type) AND ([Date_Added] = @Original_Date_Added) AND ([Stop_From] = @Original_Stop_From) AND ([Stop_To] = @Original_Stop_To) AND ([Show_Power] = @Original_Show_Power) AND ([In_Use] = @Original_In_Use))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Incident_Type", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Incident_Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date_Added", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date_Added", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Stop_From", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_From", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Stop_To", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_To", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Show_Power", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Show_Power", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_In_Use", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "In_Use", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Traffic_Incident] ([Incident_Type], [Date_Added], [Stop_From], [Stop_To], [Show_Power], [In_Use]) VALUES (@Incident_Type, @Date_Added, @Stop_From, @Stop_To, @Show_Power, @In_Use);
+SELECT ID, Incident_Type, Date_Added, Stop_From, Stop_To, Show_Power, In_Use FROM Traffic_Incident WHERE (ID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Incident_Type", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Incident_Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date_Added", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date_Added", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Stop_From", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_From", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Stop_To", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_To", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Show_Power", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Show_Power", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@In_Use", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "In_Use", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Traffic_Incident] SET [Incident_Type] = @Incident_Type, [Date_Added] = @Date_Added, [Stop_From] = @Stop_From, [Stop_To] = @Stop_To, [Show_Power] = @Show_Power, [In_Use] = @In_Use WHERE (([ID] = @Original_ID) AND ([Incident_Type] = @Original_Incident_Type) AND ([Date_Added] = @Original_Date_Added) AND ([Stop_From] = @Original_Stop_From) AND ([Stop_To] = @Original_Stop_To) AND ([Show_Power] = @Original_Show_Power) AND ([In_Use] = @Original_In_Use));
+SELECT ID, Incident_Type, Date_Added, Stop_From, Stop_To, Show_Power, In_Use FROM Traffic_Incident WHERE (ID = @ID)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Incident_Type", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Incident_Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date_Added", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date_Added", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Stop_From", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_From", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Stop_To", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_To", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Show_Power", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Show_Power", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@In_Use", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "In_Use", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Incident_Type", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Incident_Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date_Added", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date_Added", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Stop_From", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_From", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Stop_To", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_To", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Show_Power", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Show_Power", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_In_Use", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "In_Use", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::NetMPK.Service.Properties.Settings.Default.NetMPKDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT ID, Incident_Type, Date_Added, Stop_From, Stop_To, Show_Power, In_Use FROM" +
+                " Traffic_Incident";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = @"SELECT        ID, Incident_Type, Date_Added, Stop_From, Stop_To, Show_Power, In_Use
+FROM            Traffic_Incident
+WHERE        (Incident_Type = @IncidentType) AND (Stop_From = @StopFrom) AND (Stop_To = @StopTo) OR
+                         (Incident_Type = @IncidentType) AND (Stop_From = @StopTo) AND (Stop_To = @StopFrom)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IncidentType", global::System.Data.SqlDbType.VarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "Incident_Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StopFrom", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_From", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StopTo", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Stop_To", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(MPKDB.Traffic_IncidentDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual MPKDB.Traffic_IncidentDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            MPKDB.Traffic_IncidentDataTable dataTable = new MPKDB.Traffic_IncidentDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual MPKDB.Traffic_IncidentDataTable GetDataByIncident(string IncidentType, int StopFrom, int StopTo) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((IncidentType == null)) {
+                throw new global::System.ArgumentNullException("IncidentType");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(IncidentType));
+            }
+            this.Adapter.SelectCommand.Parameters[1].Value = ((int)(StopFrom));
+            this.Adapter.SelectCommand.Parameters[2].Value = ((int)(StopTo));
+            MPKDB.Traffic_IncidentDataTable dataTable = new MPKDB.Traffic_IncidentDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(MPKDB.Traffic_IncidentDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(MPKDB dataSet) {
+            return this.Adapter.Update(dataSet, "Traffic_Incident");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_ID, string Original_Incident_Type, System.DateTime Original_Date_Added, int Original_Stop_From, int Original_Stop_To, int Original_Show_Power, bool Original_In_Use) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
+            if ((Original_Incident_Type == null)) {
+                throw new global::System.ArgumentNullException("Original_Incident_Type");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_Incident_Type));
+            }
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_Date_Added));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_Stop_From));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_Stop_To));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_Show_Power));
+            this.Adapter.DeleteCommand.Parameters[6].Value = ((bool)(Original_In_Use));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string Incident_Type, System.DateTime Date_Added, int Stop_From, int Stop_To, int Show_Power, bool In_Use) {
+            if ((Incident_Type == null)) {
+                throw new global::System.ArgumentNullException("Incident_Type");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Incident_Type));
+            }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(Date_Added));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(Stop_From));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(Stop_To));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(Show_Power));
+            this.Adapter.InsertCommand.Parameters[5].Value = ((bool)(In_Use));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string Incident_Type, System.DateTime Date_Added, int Stop_From, int Stop_To, int Show_Power, bool In_Use, int Original_ID, string Original_Incident_Type, System.DateTime Original_Date_Added, int Original_Stop_From, int Original_Stop_To, int Original_Show_Power, bool Original_In_Use, int ID) {
+            if ((Incident_Type == null)) {
+                throw new global::System.ArgumentNullException("Incident_Type");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(Incident_Type));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(Date_Added));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Stop_From));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Stop_To));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Show_Power));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((bool)(In_Use));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_ID));
+            if ((Original_Incident_Type == null)) {
+                throw new global::System.ArgumentNullException("Original_Incident_Type");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Incident_Type));
+            }
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(Original_Date_Added));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_Stop_From));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_Stop_To));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_Show_Power));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((bool)(Original_In_Use));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(ID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string Incident_Type, System.DateTime Date_Added, int Stop_From, int Stop_To, int Show_Power, bool In_Use, int Original_ID, string Original_Incident_Type, System.DateTime Original_Date_Added, int Original_Stop_From, int Original_Stop_To, int Original_Show_Power, bool Original_In_Use) {
+            return this.Update(Incident_Type, Date_Added, Stop_From, Stop_To, Show_Power, In_Use, Original_ID, Original_Incident_Type, Original_Date_Added, Original_Stop_From, Original_Stop_To, Original_Show_Power, Original_In_Use, Original_ID);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class Reference_Points_DistanceTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public Reference_Points_DistanceTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "Reference_Points_Distance";
+            tableMapping.ColumnMappings.Add("Point_From", "Point_From");
+            tableMapping.ColumnMappings.Add("Point_To", "Point_To");
+            tableMapping.ColumnMappings.Add("Distance", "Distance");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Reference_Points_Distance] ([Point_From], [Point_To], [Distanc" +
+                "e]) VALUES (@Point_From, @Point_To, @Distance)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Point_From", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Point_From", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Point_To", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Point_To", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Distance", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Distance", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::NetMPK.Service.Properties.Settings.Default.NetMPKDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT Point_From, Point_To, Distance FROM dbo.Reference_Points_Distance";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT        Distance\r\nFROM            Reference_Points_Distance\r\nWHERE        (" +
+                "Point_From = @PointFrom) AND (Point_To = @PointTo)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PointFrom", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Point_From", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PointTo", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Point_To", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(MPKDB.Reference_Points_DistanceDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual MPKDB.Reference_Points_DistanceDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            MPKDB.Reference_Points_DistanceDataTable dataTable = new MPKDB.Reference_Points_DistanceDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(MPKDB.Reference_Points_DistanceDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(MPKDB dataSet) {
+            return this.Adapter.Update(dataSet, "Reference_Points_Distance");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int Point_From, int Point_To, int Distance) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Point_From));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(Point_To));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(Distance));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> GetDistanceFromPoints(int PointFrom, int PointTo) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(PointFrom));
+            command.Parameters[1].Value = ((int)(PointTo));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
+            }
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -21098,8 +20562,6 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
         
         private MPK_UserTableAdapter _mPK_UserTableAdapter;
         
-        private MPK_User_Tracking_InfoTableAdapter _mPK_User_Tracking_InfoTableAdapter;
-        
         private Points_DistanceTableAdapter _points_DistanceTableAdapter;
         
         private Route_PointsTableAdapter _route_PointsTableAdapter;
@@ -21108,9 +20570,11 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
         
         private StreetsTableAdapter _streetsTableAdapter;
         
-        private Traffic_EventTableAdapter _traffic_EventTableAdapter;
-        
         private MPK_User_RoutesTableAdapter _mPK_User_RoutesTableAdapter;
+        
+        private Traffic_IncidentTableAdapter _traffic_IncidentTableAdapter;
+        
+        private Reference_Points_DistanceTableAdapter _reference_Points_DistanceTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -21166,20 +20630,6 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
             }
             set {
                 this._mPK_UserTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
-            "a", "System.Drawing.Design.UITypeEditor")]
-        public MPK_User_Tracking_InfoTableAdapter MPK_User_Tracking_InfoTableAdapter {
-            get {
-                return this._mPK_User_Tracking_InfoTableAdapter;
-            }
-            set {
-                this._mPK_User_Tracking_InfoTableAdapter = value;
             }
         }
         
@@ -21244,12 +20694,12 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public Traffic_EventTableAdapter Traffic_EventTableAdapter {
+        public MPK_User_RoutesTableAdapter MPK_User_RoutesTableAdapter {
             get {
-                return this._traffic_EventTableAdapter;
+                return this._mPK_User_RoutesTableAdapter;
             }
             set {
-                this._traffic_EventTableAdapter = value;
+                this._mPK_User_RoutesTableAdapter = value;
             }
         }
         
@@ -21258,12 +20708,26 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public MPK_User_RoutesTableAdapter MPK_User_RoutesTableAdapter {
+        public Traffic_IncidentTableAdapter Traffic_IncidentTableAdapter {
             get {
-                return this._mPK_User_RoutesTableAdapter;
+                return this._traffic_IncidentTableAdapter;
             }
             set {
-                this._mPK_User_RoutesTableAdapter = value;
+                this._traffic_IncidentTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public Reference_Points_DistanceTableAdapter Reference_Points_DistanceTableAdapter {
+            get {
+                return this._reference_Points_DistanceTableAdapter;
+            }
+            set {
+                this._reference_Points_DistanceTableAdapter = value;
             }
         }
         
@@ -21298,10 +20762,6 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                             && (this._mPK_UserTableAdapter.Connection != null))) {
                     return this._mPK_UserTableAdapter.Connection;
                 }
-                if (((this._mPK_User_Tracking_InfoTableAdapter != null) 
-                            && (this._mPK_User_Tracking_InfoTableAdapter.Connection != null))) {
-                    return this._mPK_User_Tracking_InfoTableAdapter.Connection;
-                }
                 if (((this._points_DistanceTableAdapter != null) 
                             && (this._points_DistanceTableAdapter.Connection != null))) {
                     return this._points_DistanceTableAdapter.Connection;
@@ -21318,13 +20778,17 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                             && (this._streetsTableAdapter.Connection != null))) {
                     return this._streetsTableAdapter.Connection;
                 }
-                if (((this._traffic_EventTableAdapter != null) 
-                            && (this._traffic_EventTableAdapter.Connection != null))) {
-                    return this._traffic_EventTableAdapter.Connection;
-                }
                 if (((this._mPK_User_RoutesTableAdapter != null) 
                             && (this._mPK_User_RoutesTableAdapter.Connection != null))) {
                     return this._mPK_User_RoutesTableAdapter.Connection;
+                }
+                if (((this._traffic_IncidentTableAdapter != null) 
+                            && (this._traffic_IncidentTableAdapter.Connection != null))) {
+                    return this._traffic_IncidentTableAdapter.Connection;
+                }
+                if (((this._reference_Points_DistanceTableAdapter != null) 
+                            && (this._reference_Points_DistanceTableAdapter.Connection != null))) {
+                    return this._reference_Points_DistanceTableAdapter.Connection;
                 }
                 return null;
             }
@@ -21348,9 +20812,6 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                 if ((this._mPK_UserTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._mPK_User_Tracking_InfoTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._points_DistanceTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -21363,10 +20824,13 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                 if ((this._streetsTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._traffic_EventTableAdapter != null)) {
+                if ((this._mPK_User_RoutesTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._mPK_User_RoutesTableAdapter != null)) {
+                if ((this._traffic_IncidentTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._reference_Points_DistanceTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -21443,12 +20907,12 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._traffic_EventTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Traffic_Event.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._traffic_IncidentTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Traffic_Incident.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._traffic_EventTableAdapter.Update(updatedRows));
+                    result = (result + this._traffic_IncidentTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -21461,12 +20925,12 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._mPK_User_Tracking_InfoTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.MPK_User_Tracking_Info.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._reference_Points_DistanceTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Reference_Points_Distance.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._mPK_User_Tracking_InfoTableAdapter.Update(updatedRows));
+                    result = (result + this._reference_Points_DistanceTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -21536,11 +21000,11 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._traffic_EventTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Traffic_Event.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._traffic_IncidentTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Traffic_Incident.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._traffic_EventTableAdapter.Update(addedRows));
+                    result = (result + this._traffic_IncidentTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -21552,11 +21016,11 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._mPK_User_Tracking_InfoTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.MPK_User_Tracking_Info.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._reference_Points_DistanceTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Reference_Points_Distance.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._mPK_User_Tracking_InfoTableAdapter.Update(addedRows));
+                    result = (result + this._reference_Points_DistanceTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -21570,11 +21034,11 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateDeletedRows(MPKDB dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._mPK_User_Tracking_InfoTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.MPK_User_Tracking_Info.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._reference_Points_DistanceTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Reference_Points_Distance.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._mPK_User_Tracking_InfoTableAdapter.Update(deletedRows));
+                    result = (result + this._reference_Points_DistanceTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -21586,11 +21050,11 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._traffic_EventTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Traffic_Event.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._traffic_IncidentTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Traffic_Incident.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._traffic_EventTableAdapter.Update(deletedRows));
+                    result = (result + this._traffic_IncidentTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -21704,11 +21168,6 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._mPK_User_Tracking_InfoTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._mPK_User_Tracking_InfoTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._points_DistanceTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._points_DistanceTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -21729,13 +21188,18 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._traffic_EventTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._traffic_EventTableAdapter.Connection) == false))) {
+            if (((this._mPK_User_RoutesTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._mPK_User_RoutesTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._mPK_User_RoutesTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._mPK_User_RoutesTableAdapter.Connection) == false))) {
+            if (((this._traffic_IncidentTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._traffic_IncidentTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._reference_Points_DistanceTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._reference_Points_DistanceTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -21798,15 +21262,6 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                         adaptersWithAcceptChangesDuringUpdate.Add(this._mPK_UserTableAdapter.Adapter);
                     }
                 }
-                if ((this._mPK_User_Tracking_InfoTableAdapter != null)) {
-                    revertConnections.Add(this._mPK_User_Tracking_InfoTableAdapter, this._mPK_User_Tracking_InfoTableAdapter.Connection);
-                    this._mPK_User_Tracking_InfoTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._mPK_User_Tracking_InfoTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._mPK_User_Tracking_InfoTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._mPK_User_Tracking_InfoTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._mPK_User_Tracking_InfoTableAdapter.Adapter);
-                    }
-                }
                 if ((this._points_DistanceTableAdapter != null)) {
                     revertConnections.Add(this._points_DistanceTableAdapter, this._points_DistanceTableAdapter.Connection);
                     this._points_DistanceTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -21843,15 +21298,6 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                         adaptersWithAcceptChangesDuringUpdate.Add(this._streetsTableAdapter.Adapter);
                     }
                 }
-                if ((this._traffic_EventTableAdapter != null)) {
-                    revertConnections.Add(this._traffic_EventTableAdapter, this._traffic_EventTableAdapter.Connection);
-                    this._traffic_EventTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._traffic_EventTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._traffic_EventTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._traffic_EventTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._traffic_EventTableAdapter.Adapter);
-                    }
-                }
                 if ((this._mPK_User_RoutesTableAdapter != null)) {
                     revertConnections.Add(this._mPK_User_RoutesTableAdapter, this._mPK_User_RoutesTableAdapter.Connection);
                     this._mPK_User_RoutesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -21859,6 +21305,24 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                     if (this._mPK_User_RoutesTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._mPK_User_RoutesTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._mPK_User_RoutesTableAdapter.Adapter);
+                    }
+                }
+                if ((this._traffic_IncidentTableAdapter != null)) {
+                    revertConnections.Add(this._traffic_IncidentTableAdapter, this._traffic_IncidentTableAdapter.Connection);
+                    this._traffic_IncidentTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._traffic_IncidentTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._traffic_IncidentTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._traffic_IncidentTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._traffic_IncidentTableAdapter.Adapter);
+                    }
+                }
+                if ((this._reference_Points_DistanceTableAdapter != null)) {
+                    revertConnections.Add(this._reference_Points_DistanceTableAdapter, this._reference_Points_DistanceTableAdapter.Connection);
+                    this._reference_Points_DistanceTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._reference_Points_DistanceTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._reference_Points_DistanceTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._reference_Points_DistanceTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._reference_Points_DistanceTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -21931,10 +21395,6 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                     this._mPK_UserTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._mPK_UserTableAdapter]));
                     this._mPK_UserTableAdapter.Transaction = null;
                 }
-                if ((this._mPK_User_Tracking_InfoTableAdapter != null)) {
-                    this._mPK_User_Tracking_InfoTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._mPK_User_Tracking_InfoTableAdapter]));
-                    this._mPK_User_Tracking_InfoTableAdapter.Transaction = null;
-                }
                 if ((this._points_DistanceTableAdapter != null)) {
                     this._points_DistanceTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._points_DistanceTableAdapter]));
                     this._points_DistanceTableAdapter.Transaction = null;
@@ -21951,13 +21411,17 @@ SELECT ID, UserID, First_Stop_ID, Last_Stop_ID FROM MPK_User_Routes WHERE (ID = 
                     this._streetsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._streetsTableAdapter]));
                     this._streetsTableAdapter.Transaction = null;
                 }
-                if ((this._traffic_EventTableAdapter != null)) {
-                    this._traffic_EventTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._traffic_EventTableAdapter]));
-                    this._traffic_EventTableAdapter.Transaction = null;
-                }
                 if ((this._mPK_User_RoutesTableAdapter != null)) {
                     this._mPK_User_RoutesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._mPK_User_RoutesTableAdapter]));
                     this._mPK_User_RoutesTableAdapter.Transaction = null;
+                }
+                if ((this._traffic_IncidentTableAdapter != null)) {
+                    this._traffic_IncidentTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._traffic_IncidentTableAdapter]));
+                    this._traffic_IncidentTableAdapter.Transaction = null;
+                }
+                if ((this._reference_Points_DistanceTableAdapter != null)) {
+                    this._reference_Points_DistanceTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._reference_Points_DistanceTableAdapter]));
+                    this._reference_Points_DistanceTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
