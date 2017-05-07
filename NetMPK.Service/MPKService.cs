@@ -569,14 +569,14 @@ namespace NetMPK.Service
                 }
                 if(DateTime.Now.Hour > 4 && DateTime.Now.Hour < 24)
                 {
-                    List<int> idxToRemove = new List<int>();
+                    List<List<int>> idxToRemove = new List<List<int>>();
                     for(int i=0;i<output.Count;i++)
                     {
                         if (output[i].Intersect(nightLines).Any())
-                            idxToRemove.Add(i);
+                            idxToRemove.Add(output[i]);
                     }
-                    foreach (int rm in idxToRemove)
-                        output.RemoveAt(rm);
+                    foreach (var rm in idxToRemove)
+                        output.Remove(rm);
                 }
                 return output;
             }
